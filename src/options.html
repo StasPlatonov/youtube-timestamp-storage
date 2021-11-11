@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="options.css"/>
+</head>
+<body>
+    <!--div>
+        <span>Favorite color:</span>
+        <select id="color">
+        <option value="red">red</option>
+        <option value="green">green</option>
+        <option value="blue">blue</option>
+        <option value="yellow">yellow</option>
+        </select>
+    </div-->
+    <div>
+        <div id="title" class="title">Settings</div>
+    </div>
+
+    <hr>
+
+    <table class="settings-table">
+        <tr>
+            <td class="text-column">
+                <label id="marker-color-label" for="marker-color">Marker color</label>
+            </td>
+            <td>
+                <input type="color" id="marker-color" class="color-picker" name="marker-color" value="#FFFFFF" title="">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="text-column">
+                <label id="current-marker-color-label" for="current-marker-color">Active marker color</label>
+            </td>
+            <td>
+                <input type="color" id="current-marker-color" class="color-picker" name="current-marker-color" value="#00FF00" title="">
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="text-column">
+                <label id="marker-width-label" for="marker-width">Marker width</label>
+            </td>
+            <td>
+                <input type="number" id="marker-width" class="param-value" name="marker-width" min="2" max="20" value="4">
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="text-column">
+                <label id="marker-height-label" for="marker-height">Marker height</label>
+            </td>
+            <td>
+                <input type="number" id="marker-height" class="param-value" name="marker-height" min="2" max="100" value="20">
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="text-column">
+                <label id="marker-opacity-label" for="marker-opacity">Marker opacity</label>
+            </td>
+            <td>
+                <input type="number" id="marker-opacity" class="param-value" name="marker-opacity" min="0.1" max="1" step="0.05" value="0.4">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="text-column">
+                <label id="marker-offset-label" for="marker-offset">Marker offset(-10...100)</label>
+            </td>
+            <td>
+                <input type="number" id="marker-offset" class="param-value" name="marker-offset" min="-20" max="50" step="1" value="0">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="text-column">
+                <label id="history-depth-label" for="history-depth">History depth(1-1000)</label>
+            </td>
+            <td>
+                <input type="number" id="history-depth" class="param-value" name="history-depth" min="1" max="1000" value="1000">
+            </td>
+        </tr>
+    </table>
+
+    <!--label>
+        <input type="checkbox" id="like">I like colors.
+    </label-->
+
+    <hr>
+    <div class="buttons-container">
+        <button id="defaultBtn" class="button" style="float: left;">Default</button>
+        <div id="status" class="status"></div>
+        <button id="saveBtn" class="button" style="float: right;">Save</button>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+</html>

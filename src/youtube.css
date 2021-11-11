@@ -1,0 +1,75 @@
+.markers_container {
+    left: 0;
+    top: 0;
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    background: none;
+    opacity: 1;
+    z-index: 50;
+}
+
+.marker {
+    border: 1px solid #000;
+    background: #FFFFFFFF;
+    width: 4px;
+    height: 20px;
+    opacity: 0.2;
+    position: absolute;
+    top: -15px;
+    border-radius: 3px 3px 3px 3px;
+}
+
+.marker:hover {
+    transform: scale(1.5); /* (150% zoom)*/
+    opacity: 1;
+}
+
+.marker-current {
+    background: #00FF00FF;
+}
+
+.marker-tooltip {
+    /*visibility: hidden;*/
+    width: 120px;
+    /*background-color: #555;*/
+                background-color: white;
+    /*color: #fff;*/
+                color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    /*position: absolute;*/
+                    position: relative;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    /*opacity: 0;*/
+        opacity: 1;
+    transition: opacity 0.3s;
+}
+/*  
+.marker-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+  
+.marker:hover .marker-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+*/
+.custom-button {
+    opacity: 1;
+}
+
+.custom-button:disabled, custom-button[disabled]{
+  opacity: 0.2;
+}

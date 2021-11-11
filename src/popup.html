@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css"/>
+    <link rel="stylesheet" href="fa/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="popup.css"/>
+</head>
+<body>
+    <div class="body-content">
+        <div class="header">
+            <img src="./icons/timeline-32.png" class="header-icon"></img>
+            <span data-locale="name">Extension name</span>
+        </div>
+        <div class="content">
+            <div class="toolbar">
+                <div style="float:left;">
+                    <div style="padding-top:0px;">
+                        <div id="total-videos" class="total-videos" data-locale="total_videos">Total Videos</div>
+                        <div id="total-videos-value" class="total-videos-value">0</div>
+                    </div>
+                    <div style="padding-top:0px;">
+                        <div id="total-markers" class="total-markers" data-locale="total_markers">Total markers</div>
+                        <div id="total-markers-value" class="total-markers-value">0</div>
+                    </div>
+                </div>
+                <p class="header-text" data-locale="table_title"></p>
+                <button id="removeBtn" class="toolbar-button toolbar-options-button" title-locale="remove_tooltip"><i class="fa fa-trash"></i></button>
+                <button id="optionsBtn" class="toolbar-button toolbar-options-button" title-locale="settings_tooltip"><i class="fa fa-cog"></i></button>
+            </div>
+            <table id="markers-table" class = "markers-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th data-locale="column_title">Title</th>
+                        <th data-locale="column_modified">Modified</th>
+                        <th data-locale="column_markers">Markers</th>
+                        <th data-locale="column_link">Link</th>
+                    </tr>
+                </thead>
+            </table>
+            <div class="error"></div>
+            <div id="current-time"></div>
+        </div>
+        <dev class="footer">
+            <span>
+                <a href="http://google.com" data-locale="support_link">Support</a>
+            </span>
+        </div>
+    </div>
+</body>
+<script src="jquery/jquery-3.3.1.js"></script>
+<script src="datatables/datatables.min.js"></script>
+<script src="popup.js"></script>
+
+</html>

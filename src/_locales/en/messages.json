@@ -1,0 +1,13 @@
+{
+    "name": {
+        "message": "Galaxy",
+        "description": "Extension name"
+    },
+    "description": {
+        "message": "Galaxy extension",
+        "description": "Extension description"
+    },
+    "preview_title": {
+        "message": "Preview image"
+    }
+}

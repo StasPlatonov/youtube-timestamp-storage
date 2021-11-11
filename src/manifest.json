@@ -1,0 +1,80 @@
+{
+    "name": "__MSG_name__",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "description": "__MSG_description__",
+    "default_locale": "en",
+    "icons":{
+        "32": "./icons/timeline-32.png",
+        "64": "./icons/timeline-64.png",
+        "128": "./icons/timeline-128.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://www.youtube.com/*"],
+            "run_at": "document_idle",
+            "all_frames": false,
+            "js": ["youtube-content-script.js"],
+            "css": ["youtube.css"]
+        }
+   ],
+    "permissions": ["storage"],
+    "host_permissions": [
+        "https://www.youtube.com/*"
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": ["youtube.css", 
+                "icons/screenshot-white-32.png", 
+                "icons/prev-white-32.png", 
+                "icons/next-white-32.png", 
+                "icons/add-white-32.png",
+                "icons/del-white-32.png",
+                "icons/del-video.png",
+                "icons/settings.png"
+                ],
+            "matches": ["https://www.youtube.com/*"]
+        }
+    ],
+
+    "commands": {
+        "add-marker": {
+            "suggested_key": {
+                "default": "Alt+Shift+A"
+            },
+            "description": "Add playback marker!"
+        },
+        "remove-marker": {
+            "suggested_key": {
+                "default": "Alt+Shift+R"
+            },
+            "description": "Remove playback marker!"
+        },
+        "prev-marker": {
+            "suggested_key": {
+                "default": "Alt+Shift+Left"
+            },
+            "description": "Go to previous marker!"
+        },
+        "next-marker": {
+            "suggested_key": {
+                "default": "Alt+Shift+Right"
+            },
+            "description": "Go to next marker!"
+        },
+        "save-screenshot": {
+            "description": "Save screenshot!"
+        }
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "options_ui": {
+        "page": "options.html",
+        "open_in_tab": false
+    }
+}

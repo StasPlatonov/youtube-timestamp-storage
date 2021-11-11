@@ -1,0 +1,154 @@
+body {
+    width: 720px;
+    height: 100%;
+    background: #F0F0F0;
+    color: #000;
+    border-radius: 6px 6px 6px 6px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.body-content {
+    padding: 4px;
+}
+
+.header {
+    background: #D0D0D0;
+    color: #000;
+    border-radius: 4px 4px 4px 4px;
+    text-align: center;
+    font-size: 20px;
+    height: 34px;
+    padding: 2px;
+}
+
+.header-icon {
+    float: left;
+    margin: 2px;
+}
+
+.header-text {
+    margin: 0px;
+    display: inline-block;
+    text-align:center;
+    padding-top:6px;
+    font-size: 16px;
+}
+
+.footer {
+    position:absolute;
+    left: 0;
+    bottom:0;
+    padding: 2px;
+    width:99%;
+}
+
+.content {
+    padding-top: 2px;
+}
+
+.error {
+    font-weight: bold;
+    font-size: 18px;
+    font-family: Helvetica;
+    color: red;
+    display: none;
+}
+
+.markers-table {
+    width: 100%;
+}
+
+.markers-table tbody tr.selected {
+    color: black !important;
+    background-color: DodgerBlue !important;
+    font-weight: bold;
+}
+
+.markers-table tbody tr:hover {
+    background-color: DodgerBlue !Important;
+}
+
+.markers-table tr:nth-child(even) {
+    background-color: #DDDDDD;
+}
+
+.markers-table tr:nth-child(odd) {
+    background-color: white;
+}
+
+.toolbar {
+    padding: 4px;
+    width: 98%;
+    margin-right: 10px;
+    display: inline-block;
+    text-align: center;
+}
+
+.toolbar-button {
+    background-color: DodgerBlue;
+    border: none;
+    color: white; /* White text */
+    padding: 4px 4px; /* Some padding */
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px 4px 4px 4px;
+    width: 32px;
+    height: 32px;
+    margin: 2px;
+}
+  
+/* Darker background on mouse-over */
+.toolbar-button:hover {
+    background-color: RoyalBlue;
+}
+
+.toolbar-options-button {
+    float: right;
+}
+
+
+.total-markers {
+    display: flex;
+    float:left;
+}
+
+.total-markers-value {
+    padding-left: 4px;
+    display: flex;
+}
+
+.total-videos {
+    display: flex;
+    float:left;
+}
+
+.total-videos-value {
+    padding-left: 4px;
+    display: flex;
+}
+
+/*
+.tooltip {
+    position: relative;
+ }
+
+ .tooltip::before {
+    background-color: white;
+    border: 1px solid #888;
+    border-radius: 2px;
+    color: #444;
+    content: attr(data-title);
+    display: none;
+    font-family: sans-serif;
+    font-size: 14px;
+    padding: 2px 5px;
+    position: absolute;
+    top: 20px;
+    left: 5px;
+    z-index: 1;
+ }
+
+ .tooltip:hover::before {
+    display: block;
+ }*/

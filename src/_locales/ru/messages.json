@@ -1,0 +1,82 @@
+{
+    "name": {
+        "message": "Timeline Enhancer for Youtube",
+        "description": "Название расширения"
+    },
+    "description": {
+        "message": "Запоминайте необходимые временные метки в видео и моментально возвращайтесь к ним в любое время!",
+        "description": "Описание расширения"
+    },
+    "preview_title": {
+        "message": "Предпросмотр изображения"
+    },
+    "options_title": {
+        "message": "Настройки расширения"
+    },
+    "marker_color": {
+        "message": "Цвет маркера"
+    },
+    "current_marker_color": {
+        "message": "Цвет активного маркера"
+    },
+    "marker_width": {
+        "message": "Ширина маркера"
+    },
+    "marker_height": {
+        "message": "Высота маркера"
+    },
+    "marker_opacity": {
+        "message": "Прозрачность маркера"
+    },
+    "marker_offset": {
+        "message": "Смещение маркера"
+    },
+    "history_depth": {
+        "message": "Глубина истории"
+    },
+    "save_button": {
+        "message": "Сохранить"
+    },
+    "default_button": {
+        "message": "По-умолчанию"
+    },
+    "saved_message": {
+        "message": "Сохранено"
+    },
+    "options_button": {
+        "message": "Настройки"
+    },
+    "support_link": {
+        "message": "Поддержка"
+    },
+    "watch_link": {
+        "message": "Смотреть на Youtube"
+    },
+    "table_title": {
+        "message": "История маркеров"
+    },
+    "column_title": {
+        "message": "Название"
+    },
+    "column_modified": {
+        "message": "Изменено"
+    },
+    "column_markers": {
+        "message": "Маркеры"
+    },
+    "column_link": {
+        "message": "Ссылка"
+    },
+    "remove_tooltip": {
+        "message": "Удалить выбранные видео из списка"
+    },
+    "settings_tooltip": {
+        "message": "Открыть настройки"
+    },
+    "total_videos": {
+        "message": "Всего видео:"
+    },
+    "total_markers": {
+        "message": "Всего маркеров:"
+    }
+}
