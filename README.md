@@ -8,3 +8,6 @@ This extension allow you to add visual markers to progress bar and quickly navig
 It has a viewable history of marked videos and has visual settings for markers. Additionally it 
 blocks some popup windows.
 
+Please, send any questions/suggestions to:
+platonovstas1982@gmail.com
+
