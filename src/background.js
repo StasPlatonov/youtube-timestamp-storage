@@ -7,7 +7,8 @@ const defaultSettings = {
     "marker-height": 20,
     "marker-opacity": 0.4,
     "marker-offset": 0,
-    "history-depth": 100
+    "history-depth": 100,
+    "show_labels": false
 };
 
 // Read settings

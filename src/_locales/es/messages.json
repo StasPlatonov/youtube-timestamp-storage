@@ -1,0 +1,142 @@
+{
+    "name": {
+        "message": "Timeline Enhancer for Youtube",
+        "description": "Nombre de la extensión"
+    },
+    "description": {
+        "message": "Guarde sus marcas de tiempo y vuelve fácilmente en cualquier momento!",
+        "description": ""
+    },
+    "options_title": {
+        "message": "Extensión ajustes"
+    },
+    "marker_color": {
+        "message": "Color de marcador?"
+    },
+    "current_marker_color": {
+        "message": "Color de marcador activo"
+    },
+    "marker_width": {
+        "message": "Anchura de marcador"
+    },
+    "marker_height": {
+        "message": "Altura de marcador"
+    },
+    "marker_opacity": {
+        "message": "Transparencia de marcador"
+    },
+    "marker_offset": {
+        "message": "Desplazamiento de marcador(Y)"
+    },
+    "history_depth": {
+        "message": "Profundidad de la historia"
+    },
+    "show_labels": {
+        "message": "Mostrar etiqueta"
+    },
+    "save_button": {
+        "message": "Guardar?"
+    },
+    "default_button": {
+        "message": "Por defecto"
+    },
+    "saved_message": {
+        "message": "Guardado?"
+    },
+    "options_button": {
+        "message": "Configuración"
+    },
+    "support_link": {
+        "message": "Apoyo?"
+    },
+    "watch_link": {
+        "message": "Mirar"
+    },
+    "table_title": {
+        "message": "Historia de los marcadores"
+    },
+    "column_title": {
+        "message": "Título"
+    },
+    "column_modified": {
+        "message": "Cambiado?"
+    },
+    "column_markers": {
+        "message": "Los marcadores"
+    },
+    "column_author": {
+        "message": "Autor"
+    },
+    "column_link": {
+        "message": "Referencia"
+    },
+    "remove_tooltip": {
+        "message": "Remove selected video from list"
+    },
+    "settings_tooltip": {
+        "message": "Abrir configuración"
+    },
+    "total_videos": {
+        "message": "Videos totales:"
+    },
+    "total_markers": {
+        "message": "Marcadores totales:"
+    },
+    "tooltip_prev" : {
+        "message": "Marcador anterior"
+    },
+    "tooltip_next" : {
+        "message": "Marcador seguiente"
+    },
+    "tooltip_add_marker" : {
+        "message": "Crear el marcador"
+    },
+    "tooltip_remove_marker" : {
+        "message": "Eliminar el marcador"
+    },
+    "tooltip_screenshot" : {
+        "message": "Captura de pantalla"
+    },
+    "table_empty_table" : {
+        "message": "Faltan datos"
+    },
+    "table_info" : {
+        "message": "Línea desde _START_ hasta _END_ de _TOTAL_"
+    },
+    "table_info_empty" : {
+        "message": "No hay resultos"
+    },
+    "table_info_filtered" : {
+        "message": "(filtrado de _MAX_ líneas)"
+    },
+    "table_length_menu" : {
+        "message": "Mostrar _MENU_ líneas"
+    },
+    "table_loading_records" : {
+        "message": "Descarga..."
+    },
+    "table_processing" : {
+        "message": "Procesamiento..."
+    },
+    "table_search" : {
+        "message": "Búsqueda:"
+    },
+    "table_zero_records" : {
+        "message": "No se encontraron coincidencias"
+    },
+    "table_paginate_first" : {
+        "message": "Principio"
+    },
+    "table_paginate_last" : {
+        "message": "Final"
+    },
+    "table_paginate_next" : {
+        "message": "Seguiente"
+    },
+    "table_paginate_previous" : {
+        "message": "Anterior"
+    },
+    "table_select_rows" : {
+        "message": "Lineas seleccionadas: %d"
+    }
+}

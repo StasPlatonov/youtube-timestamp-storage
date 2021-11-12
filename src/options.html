@@ -15,7 +15,7 @@
         </select>
     </div-->
     <div>
-        <div id="title" class="title">Settings</div>
+        <div id="title" class="title" data-locale="options_title">Settings</div>
     </div>
 
     <hr>
@@ -23,7 +23,7 @@
     <table class="settings-table">
         <tr>
             <td class="text-column">
-                <label id="marker-color-label" for="marker-color">Marker color</label>
+                <label id="marker-color-label" for="marker-color" data-locale="marker_color">Marker color</label>
             </td>
             <td>
                 <input type="color" id="marker-color" class="color-picker" name="marker-color" value="#FFFFFF" title="">
@@ -32,7 +32,7 @@
 
         <tr>
             <td class="text-column">
-                <label id="current-marker-color-label" for="current-marker-color">Active marker color</label>
+                <label id="current-marker-color-label" for="current-marker-color" data-locale="current_marker_color">Active marker color</label>
             </td>
             <td>
                 <input type="color" id="current-marker-color" class="color-picker" name="current-marker-color" value="#00FF00" title="">
@@ -41,7 +41,7 @@
         
         <tr>
             <td class="text-column">
-                <label id="marker-width-label" for="marker-width">Marker width</label>
+                <label id="marker-width-label" for="marker-width" data-locale="marker_width">Marker width</label>
             </td>
             <td>
                 <input type="number" id="marker-width" class="param-value" name="marker-width" min="2" max="20" value="4">
@@ -50,7 +50,7 @@
         
         <tr>
             <td class="text-column">
-                <label id="marker-height-label" for="marker-height">Marker height</label>
+                <label id="marker-height-label" for="marker-height" data-locale="marker_height">Marker height</label>
             </td>
             <td>
                 <input type="number" id="marker-height" class="param-value" name="marker-height" min="2" max="100" value="20">
@@ -59,7 +59,7 @@
         
         <tr>
             <td class="text-column">
-                <label id="marker-opacity-label" for="marker-opacity">Marker opacity</label>
+                <label id="marker-opacity-label" for="marker-opacity" data-locale="marker_opacity">Marker opacity</label>
             </td>
             <td>
                 <input type="number" id="marker-opacity" class="param-value" name="marker-opacity" min="0.1" max="1" step="0.05" value="0.4">
@@ -68,7 +68,7 @@
 
         <tr>
             <td class="text-column">
-                <label id="marker-offset-label" for="marker-offset">Marker offset(-10...100)</label>
+                <label id="marker-offset-label" for="marker-offset" data-locale="marker_offset">Marker offset(-10...100)</label>
             </td>
             <td>
                 <input type="number" id="marker-offset" class="param-value" name="marker-offset" min="-20" max="50" step="1" value="0">
@@ -77,7 +77,7 @@
 
         <tr>
             <td class="text-column">
-                <label id="history-depth-label" for="history-depth">History depth(1-1000)</label>
+                <label id="history-depth-label" for="history-depth" data-locale="history_depth">History depth(1-1000)</label>
             </td>
             <td>
                 <input type="number" id="history-depth" class="param-value" name="history-depth" min="1" max="1000" value="1000">
@@ -85,15 +85,15 @@
         </tr>
     </table>
 
-    <!--label>
-        <input type="checkbox" id="like">I like colors.
-    </label-->
+    <label>
+        <input type="checkbox" id="show-labels"><span data-locale="show_labels">ShowLabels</span>
+    </label>
 
     <hr>
     <div class="buttons-container">
-        <button id="defaultBtn" class="button" style="float: left;">Default</button>
+        <button id="defaultBtn" class="button" style="float: left;" data-locale="default_button">Default</button>
         <div id="status" class="status"></div>
-        <button id="saveBtn" class="button" style="float: right;">Save</button>
+        <button id="saveBtn" class="button" style="float: right;" data-locale="save_button">Save</button>
     </div>
 
     <script src="options.js"></script>

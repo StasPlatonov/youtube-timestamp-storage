@@ -221,23 +221,23 @@ function init() {
                 selector: 'td:first-child'
             },
             language: {
-                emptyTable:     "Данные в таблице недоступны",
-                info:           "Записи с _START_ по _END_ из _TOTAL_",
-                infoEmpty:      "Записей нет",
-                infoFiltered:   "(отфильтровано из _MAX_ записей)",
-                lengthMenu:     "Отображать _MENU_ записей",
-                loadingRecords: "Загрузка...",
-                processing:     "Обработка...",
-                search:         "Поиск:",
-                zeroRecords:    "Совпадений не найдено",
+                emptyTable:     chrome.i18n.getMessage("table_empty_table"),
+                info:           chrome.i18n.getMessage("table_info"),
+                infoEmpty:      chrome.i18n.getMessage("table_info_empty"),
+                infoFiltered:   chrome.i18n.getMessage("table_info_filtered"),
+                lengthMenu:     chrome.i18n.getMessage("table_length_menu"),
+                loadingRecords: chrome.i18n.getMessage("table_loading_records"),
+                processing:     chrome.i18n.getMessage("table_processing"),
+                search:         chrome.i18n.getMessage("table_search"),
+                zeroRecords:    chrome.i18n.getMessage("table_zero_records"),
                 paginate: {
-                    first:      "Начало",
-                    last:       "Конец",
-                    next:       "След.",
-                    previous:   "Пред."
+                    first:      chrome.i18n.getMessage("table_paginate_first"),
+                    last:       chrome.i18n.getMessage("table_paginate_last"),
+                    next:       chrome.i18n.getMessage("table_paginate_next"),
+                    previous:   chrome.i18n.getMessage("table_paginate_previous")
                 },
                 select: {
-                    rows: "Строк выбрано: %d"
+                    rows: chrome.i18n.getMessage("table_select_rows")
                 },
             },
             // Add some magic to enable search =)

@@ -1,0 +1,142 @@
+{
+    "name": {
+        "message": "Timeline Enhancer for Youtube",
+        "description": "Extension name"
+    },
+    "description": {
+        "message": "Store your video timestamps and navigate between them easily at any time!",
+        "description": "Extension description"
+    },
+    "options_title": {
+        "message": "Extension settings"
+    },
+    "marker_color": {
+        "message": "Marker color"
+    },
+    "current_marker_color": {
+        "message": "Active marker color"
+    },
+    "marker_width": {
+        "message": "Marker width"
+    },
+    "marker_height": {
+        "message": "Marker height"
+    },
+    "marker_opacity": {
+        "message": "Marker opacity"
+    },
+    "marker_offset": {
+        "message": "Marker offset(Y)"
+    },
+    "history_depth": {
+        "message": "History depth"
+    },
+    "show_labels": {
+        "message": "Show labels"
+    },
+    "save_button": {
+        "message": "Save"
+    },
+    "default_button": {
+        "message": "Defaults"
+    },
+    "saved_message": {
+        "message": "Saved"
+    },
+    "options_button": {
+        "message": "Settings"
+    },
+    "support_link": {
+        "message": "Support"
+    },
+    "watch_link": {
+        "message": "Watch"
+    },
+    "table_title": {
+        "message": "Markers history"
+    },
+    "column_title": {
+        "message": "Title"
+    },
+    "column_modified": {
+        "message": "Modified"
+    },
+    "column_markers": {
+        "message": "Markers"
+    },
+    "column_author": {
+        "message": "Author"
+    },
+    "column_link": {
+        "message": "Link"
+    },
+    "remove_tooltip": {
+        "message": "Remove selected video from list"
+    },
+    "settings_tooltip": {
+        "message": "Open settings"
+    },
+    "total_videos": {
+        "message": "Total videos:"
+    },
+    "total_markers": {
+        "message": "Total markers:"
+    },
+    "tooltip_prev" : {
+        "message": "Previous parker"
+    },
+    "tooltip_next" : {
+        "message": "Next marker"
+    },
+    "tooltip_add_marker" : {
+        "message": "Add marker"
+    },
+    "tooltip_remove_marker" : {
+        "message": "Remove marker"
+    },
+    "tooltip_screenshot" : {
+        "message": "Screenshot"
+    },
+    "table_empty_table" : {
+        "message": "No table data"
+    },
+    "table_info" : {
+        "message": "Records from _START_ to _END_ of _TOTAL_"
+    },
+    "table_info_empty" : {
+        "message": "No records"
+    },
+    "table_info_filtered" : {
+        "message": "(filtered of _MAX_ records)"
+    },
+    "table_length_menu" : {
+        "message": "Display _MENU_ records"
+    },
+    "table_loading_records" : {
+        "message": "Loading..."
+    },
+    "table_processing" : {
+        "message": "Processing..."
+    },
+    "table_search" : {
+        "message": "Search:"
+    },
+    "table_zero_records" : {
+        "message": "No matches found"
+    },
+    "table_paginate_first" : {
+        "message": "First"
+    },
+    "table_paginate_last" : {
+        "message": "Last"
+    },
+    "table_paginate_next" : {
+        "message": "Next"
+    },
+    "table_paginate_previous" : {
+        "message": "Prev"
+    },
+    "table_select_rows" : {
+        "message": "Records selected: %d"
+    }
+}

@@ -5,7 +5,8 @@ const defaultSettings = {
     "marker-height": 20,
     "marker-opacity": 0.4,
     "marker-offset": 0,
-    "history-depth": 100
+    "history-depth": 100,
+    "show_labels": false
 };
 //-------------------------------------------------------------------------------------------
 
@@ -25,16 +26,9 @@ chrome.storage.onChanged.addListener(({settings}) => {
 
 function localize()
 {
-    document.getElementById('title').innerText = chrome.i18n.getMessage('options_title');
-    document.getElementById('marker-color-label').innerText = chrome.i18n.getMessage('marker_color');
-    document.getElementById('current-marker-color-label').innerText = chrome.i18n.getMessage('current_marker_color');
-    document.getElementById('marker-width-label').innerText = chrome.i18n.getMessage('marker_width');
-    document.getElementById('marker-height-label').innerText = chrome.i18n.getMessage('marker_height');
-    document.getElementById('marker-opacity-label').innerText = chrome.i18n.getMessage('marker_opacity');
-    document.getElementById('marker-offset-label').innerText = chrome.i18n.getMessage('marker_offset');
-    document.getElementById('history-depth-label').innerText = chrome.i18n.getMessage('history_depth');
-    document.getElementById('saveBtn').innerText = chrome.i18n.getMessage('save_button');
-    document.getElementById('defaultBtn').innerText = chrome.i18n.getMessage('default_button');
+    document.querySelectorAll('[data-locale]').forEach(elem => {
+        elem.innerText = chrome.i18n.getMessage(elem.dataset.locale);
+    });
 }
 //-------------------------------------------------------------------------------------------
 
@@ -57,8 +51,11 @@ function saveOptions() {
         "marker-height": document.getElementById('marker-height').value,
         "marker-opacity": document.getElementById('marker-opacity').value,
         "marker-offset": document.getElementById('marker-offset').value,
-        "history-depth": document.getElementById('history-depth').value
+        "history-depth": document.getElementById('history-depth').value,
+        "show_labels": document.getElementById('show-labels').checked
     };
+
+    console.log(JSON.stringify(settings));
     
     chrome.storage.sync.set({ settings: settings }, function() {
         var status = document.getElementById('status');
@@ -96,6 +93,7 @@ function renderOptions(settings) {
     renderParameter(settings, "marker-opacity");
     renderParameter(settings, "marker-offset");
     renderParameter(settings, "history-depth");
+    document.getElementById('show-labels').checked = settings.show_labels;
 }
   //-------------------------------------------------------------------------------------------
 

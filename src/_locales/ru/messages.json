@@ -7,9 +7,6 @@
         "message": "Запоминайте необходимые временные метки в видео и моментально возвращайтесь к ним в любое время!",
         "description": "Описание расширения"
     },
-    "preview_title": {
-        "message": "Предпросмотр изображения"
-    },
     "options_title": {
         "message": "Настройки расширения"
     },
@@ -29,10 +26,13 @@
         "message": "Прозрачность маркера"
     },
     "marker_offset": {
-        "message": "Смещение маркера"
+        "message": "Смещение маркера(Y)"
     },
     "history_depth": {
         "message": "Глубина истории"
+    },
+    "show_labels": {
+        "message": "Показывать метки"
     },
     "save_button": {
         "message": "Сохранить"
@@ -81,5 +81,62 @@
     },
     "total_markers": {
         "message": "Всего маркеров:"
+    },
+    "tooltip_prev" : {
+        "message": "Предыдущий маркер"
+    },
+    "tooltip_next" : {
+        "message": "Следующий маркер"
+    },
+    "tooltip_add_marker" : {
+        "message": "Добавить маркер"
+    },
+    "tooltip_remove_marker" : {
+        "message": "Удалить маркер"
+    },
+    "tooltip_screenshot" : {
+        "message": "Скриншот"
+    },
+    "table_empty_table" : {
+        "message": "Данные в таблице недоступны"
+    },
+    "table_info" : {
+        "message": "Записи с _START_ по _END_ из _TOTAL_"
+    },
+    "table_info_empty" : {
+        "message": "Записей нет"
+    },
+    "table_info_filtered" : {
+        "message": "(отфильтровано из _MAX_ записей)"
+    },
+    "table_length_menu" : {
+        "message": "Отображать _MENU_ записей"
+    },
+    "table_loading_records" : {
+        "message": "Загрузка..."
+    },
+    "table_processing" : {
+        "message": "Обработка..."
+    },
+    "table_search" : {
+        "message": "Поиск:"
+    },
+    "table_zero_records" : {
+        "message": "Совпадений не найдено"
+    },
+    "table_paginate_first" : {
+        "message": "Начало"
+    },
+    "table_paginate_last" : {
+        "message": "Конец"
+    },
+    "table_paginate_next" : {
+        "message": "След."
+    },
+    "table_paginate_previous" : {
+        "message": "Пред."
+    },
+    "table_select_rows" : {
+        "message": "Строк выбрано: %d"
     }
 }

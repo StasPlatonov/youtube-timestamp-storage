@@ -42,28 +42,28 @@
             "suggested_key": {
                 "default": "Alt+Shift+A"
             },
-            "description": "Add playback marker!"
+            "description": "__MSG_tooltip_add_marker__"
         },
         "remove-marker": {
             "suggested_key": {
                 "default": "Alt+Shift+R"
             },
-            "description": "Remove playback marker!"
+            "description": "__MSG_tooltip_remove_marker__"
         },
         "prev-marker": {
             "suggested_key": {
                 "default": "Alt+Shift+Left"
             },
-            "description": "Go to previous marker!"
+            "description": "__MSG_tooltip_prev__"
         },
         "next-marker": {
             "suggested_key": {
                 "default": "Alt+Shift+Right"
             },
-            "description": "Go to next marker!"
+            "description": "__MSG_tooltip_next__"
         },
         "save-screenshot": {
-            "description": "Save screenshot!"
+            "description": "__MSG_tooltip_screenshot__"
         }
     },
     "background": {

@@ -107,6 +107,7 @@ chrome.storage.onChanged.addListener(({settings}, namespace) => {
     
         if (settings && settings.newValue)
         {
+            //console.log('Apply new settings');
             mainSettings = settings.newValue; // Replace settings with new
 
             deselectMarker(currentMarker);
@@ -177,9 +178,10 @@ function pad(num, size) {
 }
 
 function getTimeString(time) {
-    const hours = Math.floor(time / 3600);
-    const minutes = Math.floor((time / 60) % 60);
-    const seconds = Math.floor(time % 3600);
+    const floor = Math.floor(time);
+    const hours = Math.floor(floor / 3600);
+    const minutes = Math.floor((floor / 60) % 60);
+    const seconds = Math.floor(floor % 60);
     return `${pad(hours, 2)}:${pad(minutes, 2)}:${pad(seconds, 2)}`;
 }
 //-------------------------------------------------------------------------------------------
@@ -222,6 +224,9 @@ function applyMarkerSettings(marker, settings) {
     marker.style.height = settings["marker-height"] + "px";
     marker.style.top = `${-(parseInt(settings["marker-height"]) - 5) - parseInt(settings["marker-offset"])}px`;
     marker.style.opacity = parseFloat(settings["marker-opacity"]);
+
+    tooltip = marker.querySelector(".marker-tooltip");
+    tooltip.style.opacity = settings.show_labels ? 1 : 0;
 }
 //-------------------------------------------------------------------------------------------
 
@@ -238,27 +243,39 @@ function addVisualMarker(time, duration) {
     let percent = time * 100 / duration;
     marker.style.left = percent + "%";
 
-    if (mainSettings) {
-        applyMarkerSettings(marker, mainSettings);
-    }
-    
     //let pos = time * width / duration;
     //console.log(`Create visual marker ${time} at pos ${pos}`);
 
     marker.addEventListener("click", ()=>{
-        //console.log(`Marker ${time} clicked`);
         jumpToMarker(time);
     }, { passive: true});
 
     // Hint
-    marker.setAttribute("title", `Time: ${getTimeString(time)}`);
+    var marker_tooltip = document.createElement("div");
+    marker_tooltip.className = "marker-tooltip";
+    marker_tooltip.innerText = getTimeString(time);
+    marker_tooltip.style.opacity = (mainSettings && mainSettings.show_labels) ? 1 : 0;
 
-    /*tooltip = document.createElement("div");
-    tooltip.className = "marker-tooltip";
-    tooltip.innerText = "Description";//getTimeString(time);
-    marker.appendChild(tooltip);*/
+    /*var marker_tooltip_input = document.createElement("input");
+    marker_tooltip_input.className = "marker-tooltip-input";
+    marker_tooltip_input.type = "text";
+    marker_tooltip.appendChild(marker_tooltip_input);
+    */
 
+    //marker_tooltip.style.opacity = 0;
+    
+    marker_tooltip.addEventListener('dblclick', function (e) {
+        card.classList.toggle('large');
+    });
+
+    marker.appendChild(marker_tooltip);
+    
     markers_container.appendChild(marker);
+
+    if (mainSettings) {
+        applyMarkerSettings(marker, mainSettings);
+    }
+
     return marker;
 }
 //-------------------------------------------------------------------------------------------
@@ -636,17 +653,18 @@ function addButtonTooltip(button, text) {
     tooltip.appendChild(tooltip_text);
 
     button.addEventListener("mouseover", ()=>{
-        var percent = isFullScreen() ? 118 : 100;
         var br = button.getBoundingClientRect();
         var ttr = tooltip.getBoundingClientRect();
 
-        tooltip.style.lineHeight = `${isFullScreen() ? 22 : 15}px`;
+        tooltip.style.lineHeight = `${isFullScreen() ? 22 : 15}px`; // Change tooltip line size in fullscreen mode
         
         tooltip.style.left = `${br.left - (ttr.right - ttr.left) / 2}px`;
         tooltip.style.opacity = 1;
 
+        // Change text size in fullscreen mode
+        var percent = isFullScreen() ? 118 : 100;
+        tooltip.style.fontSize = `${percent}%`; 
         tooltip_text.style.fontSize = `${isFullScreen() ? 17 : 12}px`;
-        tooltip.style.fontSize = `${percent}%`;
     }, { passive: true});
 
     button.addEventListener("mouseout", ()=>{
@@ -669,7 +687,7 @@ function initControls(container) {
             prevButton.setAttribute("id", "prev-button");
             prevButton.setAttribute("class", "ytp-button custom-button");
             //prevButton.setAttribute("aria-label", "Prev marker");
-            prevButton.setAttribute("hint", "Предыдущий маркер");
+            prevButton.setAttribute("hint", chrome.i18n.getMessage("tooltip_prev"));
 
             const prevIcon = document.createElement('img');
             prevIcon.setAttribute("height", "32px");
@@ -701,7 +719,7 @@ function initControls(container) {
             nextButton.setAttribute("id", "next-button");
             nextButton.setAttribute("class", "ytp-button custom-button");
             //nextButton.setAttribute("aria-label", "Next marker");
-            nextButton.setAttribute("hint", "Следующий маркер");
+            nextButton.setAttribute("hint", chrome.i18n.getMessage("tooltip_next"));
 
             const nextIcon = document.createElement('img');
             nextIcon.setAttribute("height", "32px");
@@ -731,7 +749,7 @@ function initControls(container) {
             addButton.setAttribute("id", "add-button");
             addButton.setAttribute("class", "ytp-button custom-button");
             //addButton.setAttribute("aria-label", "Add marker");
-            addButton.setAttribute("hint", "Добавить маркер");
+            addButton.setAttribute("hint", chrome.i18n.getMessage("tooltip_add_marker"));
 
             const addIcon = document.createElement('img');
             addIcon.setAttribute("height", "32px");
@@ -761,7 +779,7 @@ function initControls(container) {
             removeButton.setAttribute("id", "remove-button");
             removeButton.setAttribute("class", "ytp-button custom-button");
             //removeButton.setAttribute("aria-label", "Remove marker");
-            removeButton.setAttribute("hint", "Удалить маркер");
+            removeButton.setAttribute("hint", chrome.i18n.getMessage("tooltip_remove_marker"));
 
             const removeIcon = document.createElement('img');
             removeIcon.setAttribute("height", "32px");
@@ -791,7 +809,7 @@ function initControls(container) {
             shotButton.setAttribute("id", "shot-button");
             shotButton.setAttribute("class", "ytp-button custom-button");
             //shotButton.setAttribute("aria-label", "Shot");
-            shotButton.setAttribute("hint", "Скриншот");
+            shotButton.setAttribute("hint", chrome.i18n.getMessage("tooltip_screenshot"));
 
             const icon = document.createElement('img');
             icon.setAttribute("height", "32px");
