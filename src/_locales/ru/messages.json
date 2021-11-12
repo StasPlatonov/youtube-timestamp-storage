@@ -50,7 +50,7 @@
         "message": "Поддержка"
     },
     "watch_link": {
-        "message": "Смотреть на Youtube"
+        "message": "Смотреть"
     },
     "table_title": {
         "message": "История маркеров"
@@ -63,6 +63,9 @@
     },
     "column_markers": {
         "message": "Маркеры"
+    },
+    "column_author": {
+        "message": "Автор"
     },
     "column_link": {
         "message": "Ссылка"

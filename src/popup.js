@@ -3,7 +3,7 @@ window.onload = init;
 chrome.storage.onChanged.addListener(({videodata}) =>{
     update();
 });
-//-----------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 function showError(text)
 {
@@ -15,7 +15,8 @@ function hideError()
 {
    $('.error').hide();
 }
-//-----------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
+
 /*
 function doRefresh()
 {
@@ -38,11 +39,12 @@ function doRefresh()
 
 doRefresh();
 */
+//-------------------------------------------------------------------------------------------
 
 function clearView() {
 
 }
-//-----------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 function formatDateTime(value) {
     var date = new Date(value);
@@ -53,7 +55,7 @@ function formatDateTime(value) {
  
     return date.toLocaleDateString("ru-RU", dateOptions) + " " + date.toLocaleTimeString("ru-RU", timeOptions);
 }
-//-----------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 function render(videodata) {
     var rowsData = [];
@@ -64,11 +66,12 @@ function render(videodata) {
     videos.forEach(function(video) {
         const timestamps = video["timestamps"];
         var row = {
-            "id": video["id"],
-            "title": video["title"],
-            "modified": formatDateTime(video["modified"]),
+            "id": video.id,
+            "title": video.title,
+            "modified": formatDateTime(video.modified),
             "markers": timestamps.length.toString(),
-            "link": `https://youtube.com/watch?v=${video["id"]}`
+            "author": video.author ? {"name": video.author, "link": video.author_link} : null,
+            "link": `https://youtube.com/watch?v=${video.id}`
         };
 
         rowsData.push(row);
@@ -84,7 +87,7 @@ function render(videodata) {
 
     table.columns.adjust().draw(); // Fix column sizes
 }
-//-----------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 function update() {
     clearView();
@@ -113,7 +116,7 @@ function update() {
         render(data["videodata"]);
     });
 }
-//-----------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 function localize() {
     document.querySelectorAll('[data-locale]').forEach(elem => {
@@ -124,7 +127,7 @@ function localize() {
         elem.setAttribute("title", chrome.i18n.getMessage(elem.getAttribute("title-locale")));
     });
 }
-//-----------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 function removeSelected() {
     var table = $('#markers-table').DataTable();
@@ -141,7 +144,7 @@ function removeSelected() {
         update();
     });
 }
-//-----------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 function init() {
     localize();
@@ -183,6 +186,17 @@ function init() {
                     data: "markers",
                     width: "10%"
                 },
+                { 
+                    data: "author",
+                    width: "10%",
+                    render: function (data) {
+                        if (!data) {
+                            return "";
+                        }
+
+                        return `<a href="${data.link}" target="_blank" rel="noopener noreferrer">${data.name}</a>`;
+                    }
+                },
                 {   
                     data: "link", 
                     render: function (data) {
@@ -191,11 +205,11 @@ function init() {
                 }
             ],
             autoWidth: false,
-            searching: false,
+            /*searching: false,*/
             scrollX: true,
             scrollY: 300,
             dom: 'Bfrtip',
-            responsive:true,
+            responsive: true,
             paging: true,
             pageLength: 100,
             order: [[ 3, "desc" ]],
@@ -224,7 +238,56 @@ function init() {
                 },
                 select: {
                     rows: "Строк выбрано: %d"
-                }
+                },
+            },
+            // Add some magic to enable search =)
+            initComplete: function () {
+                // Apply the search
+
+                var api = this.api();
+                 // For each column
+                api
+                .columns()
+                .eq(0)
+                .each(function (colIdx) {
+                    // Set the header cell to contain the input element
+                    var cell = $('.filters th').eq(
+                        $(api.column(colIdx).header()).index()
+                    );
+                    var title = $(cell).text();
+                    $(cell).html('<input type="text" placeholder="' + title + '" />');
+ 
+                    // On every keypress in this input
+                    $(
+                        'input',
+                        $('.filters th').eq($(api.column(colIdx).header()).index())
+                    )
+                        .off('keyup change')
+                        .on('keyup change', function (e) {
+                            e.stopPropagation();
+ 
+                            // Get the search value
+                            $(this).attr('title', $(this).val());
+                            var regexr = '({search})';
+ 
+                            var cursorPosition = this.selectionStart;
+                            // Search the column for that value
+                            api
+                                .column(colIdx)
+                                .search(
+                                    this.value != ''
+                                        ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                        : '',
+                                    this.value != '',
+                                    this.value == ''
+                                )
+                                .draw();
+ 
+                            $(this)
+                                .focus()[0]
+                                .setSelectionRange(cursorPosition, cursorPosition);
+                        });
+                });
             }
     });
 

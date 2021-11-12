@@ -7,11 +7,12 @@ const defaultSettings = {
     "marker-offset": 0,
     "history-depth": 100
 };
+//-------------------------------------------------------------------------------------------
 
 document.addEventListener('DOMContentLoaded', init);
-
 document.getElementById('saveBtn').addEventListener('click', saveOptions);
 document.getElementById('defaultBtn').addEventListener('click', resetToDefault);
+//-------------------------------------------------------------------------------------------
 
 chrome.storage.onChanged.addListener(({settings}) => {
     //console.log(JSON.stringify(settings));
@@ -20,6 +21,7 @@ chrome.storage.onChanged.addListener(({settings}) => {
         renderOptions(settings.newValue);
     }
 });
+//-------------------------------------------------------------------------------------------
 
 function localize()
 {
@@ -34,6 +36,7 @@ function localize()
     document.getElementById('saveBtn').innerText = chrome.i18n.getMessage('save_button');
     document.getElementById('defaultBtn').innerText = chrome.i18n.getMessage('default_button');
 }
+//-------------------------------------------------------------------------------------------
 
 function resetToDefault() {
     chrome.storage.sync.set({ settings: defaultSettings }, function() {
@@ -44,6 +47,7 @@ function resetToDefault() {
         }, 1000);
     });
 }
+//-------------------------------------------------------------------------------------------
 
 function saveOptions() {
     var settings = {
@@ -64,6 +68,7 @@ function saveOptions() {
         }, 1000);
     });
 }
+//-------------------------------------------------------------------------------------------
 
 function logStorage() {
     chrome.storage.sync.get(function(data){
@@ -75,11 +80,13 @@ function logStorage() {
         }
     });
 }
+//-------------------------------------------------------------------------------------------
 
 function renderParameter(settings, name)
 {
     document.getElementById(name).value = settings[name];
 }
+//-------------------------------------------------------------------------------------------
 
 function renderOptions(settings) {
     renderParameter(settings, "marker-color");
@@ -90,12 +97,14 @@ function renderOptions(settings) {
     renderParameter(settings, "marker-offset");
     renderParameter(settings, "history-depth");
 }
-  
+  //-------------------------------------------------------------------------------------------
+
 function loadOptions() {
     chrome.storage.sync.get({ settings: defaultSettings }, function(data) {
         renderOptions(data.settings);
     });
 }
+//-------------------------------------------------------------------------------------------
 
 function init() {
 
@@ -103,3 +112,4 @@ function init() {
     
     loadOptions();
 }
+//-------------------------------------------------------------------------------------------

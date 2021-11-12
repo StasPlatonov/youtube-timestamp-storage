@@ -113,6 +113,7 @@ chrome.commands.onCommand.addListener((command) => {
         return true;
     }
 })
+//-------------------------------------------------------------------------------------------
 
 chrome.runtime.onMessage.addListener((req, info, callback) =>{
     // This requires "activeTab" permission
@@ -130,6 +131,8 @@ chrome.runtime.onMessage.addListener((req, info, callback) =>{
             }
 
             video["title"] = req.marker.title;
+            video["author"] = req.marker.author;
+            video["author_link"] = req.marker.author_link;
             video["duration"] = req.marker.duration;
             video["modified"] = Date.now();
             // Add timestamp and sort
@@ -176,16 +179,6 @@ chrome.runtime.onMessage.addListener((req, info, callback) =>{
         return true;
     }
 
-    if (req.action === 'get-markers')
-    {
-        //console.log(`Get all markers for video ${req.id} from storage`);
-        getVideo({"vid": req.id}, function(video){
-            callback(video ? video["timestamps"] : null);
-        });
-
-        return true; // for async operations
-    }
-
     if (req.action === 'get-video')
     {
         getVideo({"vid": req.id}, function(video){
@@ -224,6 +217,7 @@ chrome.runtime.onMessage.addListener((req, info, callback) =>{
         return true;
     }
 })
+//-------------------------------------------------------------------------------------------
 
 function logStorage() {
     /*if (chrome.storage) {
@@ -247,6 +241,7 @@ function logStorage() {
         console.warn("chrome.storage is not accessible, check permissions");
     }*/
 }
+//-------------------------------------------------------------------------------------------
 
 function getVideo(params, callback)
 {
@@ -265,6 +260,7 @@ function getVideo(params, callback)
         callback(found);
     });
 }
+//-------------------------------------------------------------------------------------------
 
 function setVideo(video, callback)
 {
@@ -328,6 +324,7 @@ function setVideo(video, callback)
         });
     });
 }
+//-------------------------------------------------------------------------------------------
 
 function removeVideo(ids, callback) {
     if (ids.length === 0)
@@ -355,12 +352,14 @@ function removeVideo(ids, callback) {
         });
     });
 }
+//-------------------------------------------------------------------------------------------
 
 async function getCurrentTabId() {
     let queryOptions = {active: true, currentWindow: true};
     let [tab] = await chrome.tabs.query(queryOptions);
     return tab.id;
 }
+//-------------------------------------------------------------------------------------------
 
 /*
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {

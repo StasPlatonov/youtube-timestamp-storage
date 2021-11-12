@@ -1,8 +1,3 @@
-/*
-баги
-1. При смене видео по ссылке, маркеры отображаются не корректно
-
-*/
 console.log('Youtube extension attached');
 
 var mainSettings = null;
@@ -13,6 +8,7 @@ var adObserver = null;
 
 var ytVideoPlayer = null;
 var ytVideo = null;
+
 var leftControls = null;
 var rightControls = null;
 var progressBar = null;
@@ -27,6 +23,7 @@ var markersLoadingTimer = null;
 window.addEventListener('yt-navigate-start', init,   true);
 
 window.onload = init;
+//-------------------------------------------------------------------------------------------
 
 var switchVideoDetector = setInterval(function() {
     //console.log(`Current location: ${window.location.toString()}`);
@@ -41,6 +38,7 @@ var switchVideoDetector = setInterval(function() {
         }
     }
 }, 5000);
+//-------------------------------------------------------------------------------------------
 
 chrome.runtime.onMessage.addListener((req, info, cb) => {
     /*if (req.message === 'yt-tab-changed') {
@@ -61,7 +59,7 @@ chrome.runtime.onMessage.addListener((req, info, cb) => {
         return true;
     }*/
 
-    if (req.message === 'location-changed') {
+    /*if (req.message === 'location-changed') {
         
         var url = new URL(req.url);
         var video_id = url.searchParams.get("v");
@@ -69,7 +67,7 @@ chrome.runtime.onMessage.addListener((req, info, cb) => {
             init();
         }
         return true;
-    }
+    }*/
 
     if (req.action === "add-marker") {
         createMarker();
@@ -97,6 +95,7 @@ chrome.runtime.onMessage.addListener((req, info, cb) => {
         return true;
     }
 });
+//-------------------------------------------------------------------------------------------
 
 chrome.storage.onChanged.addListener(({settings}, namespace) => {
     if (namespace == "sync")
@@ -117,37 +116,7 @@ chrome.storage.onChanged.addListener(({settings}, namespace) => {
         }
     }
 });
-
-/*
-function initMarkers(vId, video) {
-    console.log(`Init markers for ${vId} with duration ${video.duration}`);
-    chrome.runtime.sendMessage({action: 'get-markers', id: vId}, function(timestamps) {
-        //console.log(`Loaded markers: ${timestamps}`);
-        if (!timestamps)
-        {
-            console.log(`No markers found for video ${vId}`);
-            return;
-        }
-        if (timestamps.length == 0) {
-            console.log(`Markers are empty for video ${vId}`);
-            return;
-        }
-        
-        const duration = video.duration;
-
-        timestamps.forEach(function(time){
-            // Create
-            currentMarker = addVisualMarker(time, duration);
-            // Add to map
-            markers.set(time, currentMarker);
-        });
-
-        if (currentMarker) {
-            selectMarker(currentMarker);
-        }
-    });
-}
-*/
+//-------------------------------------------------------------------------------------------
 
 function initMarkers(video) {
     if (!video) {
@@ -173,6 +142,7 @@ function initMarkers(video) {
         selectMarker(currentMarker);
     }
 }
+//-------------------------------------------------------------------------------------------
 
 function removeMarkers() {
     console.log(`Remove markers`);
@@ -187,12 +157,12 @@ function removeMarkers() {
     }
     currentMarker = null;
 
-    //markersLoadingTimer = null;
     if (markersLoadingTimer) {
         clearInterval(markersLoadingTimer);
         markersLoadingTimer = null;
     }
 }
+//-------------------------------------------------------------------------------------------
 
 function pad(num, size) {
     num = num.toString();
@@ -206,6 +176,7 @@ function getTimeString(time) {
     const seconds = Math.floor(time % 3600);
     return `${pad(hours, 2)}:${pad(minutes, 2)}:${pad(seconds, 2)}`;
 }
+//-------------------------------------------------------------------------------------------
 
 function selectMarker(marker) {
     if (!marker) {
@@ -232,6 +203,8 @@ function deselectMarker(marker){
         marker.classList.remove('marker-current');
     }
 }
+//-------------------------------------------------------------------------------------------
+
 
 function applyMarkerSettings(marker, settings) {
     if (!marker || !settings) {
@@ -243,6 +216,8 @@ function applyMarkerSettings(marker, settings) {
     marker.style.top = `${-(parseInt(settings["marker-height"]) - 5) - parseInt(settings["marker-offset"])}px`;
     marker.style.opacity = parseFloat(settings["marker-opacity"]);
 }
+//-------------------------------------------------------------------------------------------
+
 
 function addVisualMarker(time, duration) {
 
@@ -279,6 +254,8 @@ function addVisualMarker(time, duration) {
     markers_container.appendChild(marker);
     return marker;
 }
+//-------------------------------------------------------------------------------------------
+
 
 function removeVisualMarker(time) {
     //markersElems = progressBar.querySelectorAll(".marker");
@@ -290,6 +267,8 @@ function removeVisualMarker(time) {
         }
     });
 }
+//-------------------------------------------------------------------------------------------
+
 
 function createMarker()
 {
@@ -306,11 +285,17 @@ function createMarker()
     var duration = ytVideo.duration;
     var title = ytVideoPlayer.querySelector(".ytp-title").innerText;
 
+    const author = document.querySelector("span[itemprop='author']");
+    const authorName = author.querySelector("link[itemprop='name']").getAttribute("content");
+    const authorLink = author.querySelector("link[itemprop='url']").getAttribute("href");
+
     //console.log(`Create marker at ${time} for ${video_id} with title ${title}`);
 
     var marker = {
         "vid": video_id,
         "title": title,
+        "author": authorName,
+        "author_link": authorLink,
         "duration": duration,
         "time": time
     };
@@ -339,6 +324,8 @@ function createMarker()
         console.error(`Failed to add marker: ${error.message}`);
     }
 }
+//-------------------------------------------------------------------------------------------
+
 
 function removeMarker()
 {
@@ -388,6 +375,8 @@ function removeMarker()
         console.error(`Failed to remove marker: ${error.message}`);
     }
 }
+//-------------------------------------------------------------------------------------------
+
 
 function jumpToMarker(time)
 {
@@ -439,6 +428,8 @@ function jumpToMarker(time)
     */
     ytVideo.currentTime = time;
 }
+//-------------------------------------------------------------------------------------------
+
 
 function checkAndRemoveStaticAD(container) {
     if (!container)
@@ -456,6 +447,8 @@ function checkAndRemoveStaticAD(container) {
         container.innerHTML = "";
     //}, 100);
 }
+//-------------------------------------------------------------------------------------------
+
 
 function checkAndRemoveVideoAD(container) {
     if (!container)
@@ -484,7 +477,8 @@ function checkAndRemoveVideoAD(container) {
         }, 1000);
     }, 100);
 }
-//-----------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
+
 
 function onTargetVideoLoaded(video) {
     ytVideo = ytVideoPlayer.querySelector('video');
@@ -506,12 +500,9 @@ function onTargetVideoLoaded(video) {
     }
 
     initMarkers(video);
-
-    //markersLoadingTimer = setTimeout(function(){
-    //    initMarkers(videoId, ytVideo);
-    //}, 100);
 }
-//-----------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
+
 
 function initADBlock(container) {
     if (adObserver)
@@ -549,7 +540,8 @@ function initADBlock(container) {
     checkAndRemoveStaticAD(container);
     //checkAndRemoveVideoAD(container);
 }
-//-----------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
+
 
 function jumpToPrevMarker() {
     if (!currentMarker)
@@ -567,7 +559,8 @@ function jumpToPrevMarker() {
     prevIdx = Math.max(0, currIdx - 1);
     jumpToMarker(keys[prevIdx]);
 }
-//-----------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
+
 
 function jumpToNextMarker() {
     if (!currentMarker)
@@ -587,7 +580,8 @@ function jumpToNextMarker() {
 
     jumpToMarker(keys[nextIdx]);
 }
-//-----------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
+
 
 function saveScreenshot() {
     var video = document.querySelector('.html5-main-video');
@@ -651,6 +645,34 @@ function initControls(container) {
             rightControls.appendChild(prevButton);
             //------------------------------------------------------------------------
 
+            // Next button
+            const nextButton = document.createElement('button');
+            nextButton.setAttribute("id", "next-button");
+            nextButton.setAttribute("class", "ytp-button custom-button");
+            nextButton.setAttribute("aria-label", "Next marker");
+            nextButton.setAttribute("title", "Next marker");
+
+            const nextIcon = document.createElement('img');
+            nextIcon.setAttribute("height", "32px");
+            nextIcon.setAttribute("width", "32px");
+            nextIcon.style.paddingBottom = "7px";
+            nextIcon.style.paddingLeft = "5px";
+            nextIcon.setAttribute("src", chrome.runtime.getURL("icons/next-white-32.png"));
+
+            nextButton.appendChild(nextIcon);
+
+            nextButton.addEventListener("mouseover", ()=>{
+                nextButton.style.opacity = 0.8;
+            }, { passive: true});
+            nextButton.addEventListener("mouseout", ()=>{
+                nextButton.style.opacity = 1;
+            }, { passive: true});
+            nextButton.addEventListener('click', () =>{
+                jumpToNextMarker();
+            }, { passive: true});
+            rightControls.appendChild(nextButton);
+            //------------------------------------------------------------------------
+            
             // Add button
             addButton = document.createElement('button');
             addButton.setAttribute("id", "add-button");
@@ -708,34 +730,6 @@ function initControls(container) {
             rightControls.appendChild(removeButton);
             //------------------------------------------------------------------------
 
-            // Next button
-            const nextButton = document.createElement('button');
-            nextButton.setAttribute("id", "next-button");
-            nextButton.setAttribute("class", "ytp-button custom-button");
-            nextButton.setAttribute("aria-label", "Next marker");
-            nextButton.setAttribute("title", "Next marker");
-
-            const nextIcon = document.createElement('img');
-            nextIcon.setAttribute("height", "32px");
-            nextIcon.setAttribute("width", "32px");
-            nextIcon.style.paddingBottom = "7px";
-            nextIcon.style.paddingLeft = "5px";
-            nextIcon.setAttribute("src", chrome.runtime.getURL("icons/next-white-32.png"));
-
-            nextButton.appendChild(nextIcon);
-
-            nextButton.addEventListener("mouseover", ()=>{
-                nextButton.style.opacity = 0.8;
-            }, { passive: true});
-            nextButton.addEventListener("mouseout", ()=>{
-                nextButton.style.opacity = 1;
-            }, { passive: true});
-            nextButton.addEventListener('click', () =>{
-                jumpToNextMarker();
-            }, { passive: true});
-            rightControls.appendChild(nextButton);
-            //------------------------------------------------------------------------
-
             // Shot button
             const shotButton = document.createElement('button');
             shotButton.setAttribute("id", "shot-button");
@@ -777,7 +771,8 @@ function initControls(container) {
         }
     }, 1000);
 }
-//-----------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
+
 
 function loadSettings() {
     if (mainSettings)
@@ -790,12 +785,13 @@ function loadSettings() {
         mainSettings = sett;
     });
 }
-//-----------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
+
 
 function isAdShowing() {
     return (document.querySelector("div.ad-showing") != null);
 }
-//-----------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
 function init() {
     // Only attach while specific video view
@@ -876,3 +872,4 @@ function init() {
 
     initADBlock(adContainer);
 }
+//-------------------------------------------------------------------------------------------

@@ -2,6 +2,7 @@ body {
     width: 720px;
     height: 100%;
     background: #F0F0F0;
+    background: radial-gradient(circle, white, #CCCCDD);
     color: #000;
     border-radius: 6px 6px 6px 6px;
     padding: 0px;
