@@ -25,6 +25,7 @@ window.addEventListener('yt-navigate-start', init,   true);
 window.onload = init;
 //-------------------------------------------------------------------------------------------
 
+
 var switchVideoDetector = setInterval(function() {
     //console.log(`Current location: ${window.location.toString()}`);
     var location = window.location.toString();
@@ -39,6 +40,7 @@ var switchVideoDetector = setInterval(function() {
     }
 }, 5000);
 //-------------------------------------------------------------------------------------------
+
 
 chrome.runtime.onMessage.addListener((req, info, cb) => {
     /*if (req.message === 'yt-tab-changed') {
@@ -97,6 +99,7 @@ chrome.runtime.onMessage.addListener((req, info, cb) => {
 });
 //-------------------------------------------------------------------------------------------
 
+
 chrome.storage.onChanged.addListener(({settings}, namespace) => {
     if (namespace == "sync")
     {
@@ -117,6 +120,7 @@ chrome.storage.onChanged.addListener(({settings}, namespace) => {
     }
 });
 //-------------------------------------------------------------------------------------------
+
 
 function initMarkers(video) {
     if (!video) {
@@ -144,6 +148,7 @@ function initMarkers(video) {
 }
 //-------------------------------------------------------------------------------------------
 
+
 function removeMarkers() {
     console.log(`Remove markers`);
     markers.clear();
@@ -164,6 +169,7 @@ function removeMarkers() {
 }
 //-------------------------------------------------------------------------------------------
 
+
 function pad(num, size) {
     num = num.toString();
     while (num.length < size) num = "0" + num;
@@ -177,6 +183,7 @@ function getTimeString(time) {
     return `${pad(hours, 2)}:${pad(minutes, 2)}:${pad(seconds, 2)}`;
 }
 //-------------------------------------------------------------------------------------------
+
 
 function selectMarker(marker) {
     if (!marker) {
@@ -609,6 +616,46 @@ function saveScreenshot() {
 
     a.remove();
 }
+//-------------------------------------------------------------------------------------------
+
+
+function isFullScreen() {
+    return ytVideoPlayer.classList.contains("ytp-fullscreen");
+}
+//-------------------------------------------------------------------------------------------
+
+
+function addButtonTooltip(button, text) {
+    var tooltip = document.createElement('div');
+    tooltip.className = "custom-button-tooltip custom-button-tooltip-text-wrapper";
+    tooltip.style.top = `${button.style.top - 35}px`;
+
+    var tooltip_text = document.createElement('span');
+    tooltip_text.className = "custom-button-tooltip-text";
+    tooltip_text.innerText = button.getAttribute("hint");;
+    tooltip.appendChild(tooltip_text);
+
+    button.addEventListener("mouseover", ()=>{
+        var percent = isFullScreen() ? 118 : 100;
+        var br = button.getBoundingClientRect();
+        var ttr = tooltip.getBoundingClientRect();
+
+        tooltip.style.lineHeight = `${isFullScreen() ? 22 : 15}px`;
+        
+        tooltip.style.left = `${br.left - (ttr.right - ttr.left) / 2}px`;
+        tooltip.style.opacity = 1;
+
+        tooltip_text.style.fontSize = `${isFullScreen() ? 17 : 12}px`;
+        tooltip.style.fontSize = `${percent}%`;
+    }, { passive: true});
+
+    button.addEventListener("mouseout", ()=>{
+        tooltip.style.opacity = 0;
+    }, { passive: true});
+
+    button.appendChild(tooltip);
+}
+//-------------------------------------------------------------------------------------------
 
 function initControls(container) {
     rightControls = container.querySelector('.ytp-right-controls');
@@ -621,8 +668,8 @@ function initControls(container) {
             const prevButton = document.createElement('button');
             prevButton.setAttribute("id", "prev-button");
             prevButton.setAttribute("class", "ytp-button custom-button");
-            prevButton.setAttribute("aria-label", "Prev marker");
-            prevButton.setAttribute("title", "Prev marker");
+            //prevButton.setAttribute("aria-label", "Prev marker");
+            prevButton.setAttribute("hint", "Предыдущий маркер");
 
             const prevIcon = document.createElement('img');
             prevIcon.setAttribute("height", "32px");
@@ -634,23 +681,27 @@ function initControls(container) {
             prevButton.appendChild(prevIcon);
 
             prevButton.addEventListener("mouseover", ()=>{
-                prevButton.style.opacity = 0.8;
+                //prevButton.style.opacity = 0.8;
             }, { passive: true});
             prevButton.addEventListener("mouseout", ()=>{
-                prevButton.style.opacity = 1;
+                //prevButton.style.opacity = 1;
             }, { passive: true});
             prevButton.addEventListener('click', () =>{
                 jumpToPrevMarker();
             }, { passive: true});
+
+            addButtonTooltip(prevButton);
+
             rightControls.appendChild(prevButton);
+
             //------------------------------------------------------------------------
 
             // Next button
             const nextButton = document.createElement('button');
             nextButton.setAttribute("id", "next-button");
             nextButton.setAttribute("class", "ytp-button custom-button");
-            nextButton.setAttribute("aria-label", "Next marker");
-            nextButton.setAttribute("title", "Next marker");
+            //nextButton.setAttribute("aria-label", "Next marker");
+            nextButton.setAttribute("hint", "Следующий маркер");
 
             const nextIcon = document.createElement('img');
             nextIcon.setAttribute("height", "32px");
@@ -662,14 +713,16 @@ function initControls(container) {
             nextButton.appendChild(nextIcon);
 
             nextButton.addEventListener("mouseover", ()=>{
-                nextButton.style.opacity = 0.8;
+                //nextButton.style.opacity = 0.8;
             }, { passive: true});
             nextButton.addEventListener("mouseout", ()=>{
-                nextButton.style.opacity = 1;
+                //nextButton.style.opacity = 1;
             }, { passive: true});
             nextButton.addEventListener('click', () =>{
                 jumpToNextMarker();
             }, { passive: true});
+
+            addButtonTooltip(nextButton);
             rightControls.appendChild(nextButton);
             //------------------------------------------------------------------------
             
@@ -677,8 +730,8 @@ function initControls(container) {
             addButton = document.createElement('button');
             addButton.setAttribute("id", "add-button");
             addButton.setAttribute("class", "ytp-button custom-button");
-            addButton.setAttribute("aria-label", "Add marker");
-            addButton.setAttribute("title", "Add marker");
+            //addButton.setAttribute("aria-label", "Add marker");
+            addButton.setAttribute("hint", "Добавить маркер");
 
             const addIcon = document.createElement('img');
             addIcon.setAttribute("height", "32px");
@@ -690,14 +743,16 @@ function initControls(container) {
             addButton.appendChild(addIcon);
 
             addButton.addEventListener("mouseover", ()=>{
-                addButton.style.opacity = 0.8;
+                //addButton.style.opacity = 0.8;
             }, { passive: true});
             addButton.addEventListener("mouseout", ()=>{
-                addButton.style.opacity = 1;
+                //addButton.style.opacity = 1;
             }, { passive: true});
             addButton.addEventListener('click', () =>{
                 createMarker();
             }, { passive: true});
+
+            addButtonTooltip(addButton);
             rightControls.appendChild(addButton);
             //------------------------------------------------------------------------
 
@@ -705,8 +760,8 @@ function initControls(container) {
             const removeButton = document.createElement('button');
             removeButton.setAttribute("id", "remove-button");
             removeButton.setAttribute("class", "ytp-button custom-button");
-            removeButton.setAttribute("aria-label", "Remove marker");
-            removeButton.setAttribute("title", "Remove marker");
+            //removeButton.setAttribute("aria-label", "Remove marker");
+            removeButton.setAttribute("hint", "Удалить маркер");
 
             const removeIcon = document.createElement('img');
             removeIcon.setAttribute("height", "32px");
@@ -718,14 +773,15 @@ function initControls(container) {
             removeButton.appendChild(removeIcon);
 
             removeButton.addEventListener("mouseover", ()=>{
-                removeButton.style.opacity = 0.8;
+                //removeButton.style.opacity = 0.8;
             }, { passive: true});
             removeButton.addEventListener("mouseout", ()=>{
-                removeButton.style.opacity = 1;
+                //removeButton.style.opacity = 1;
             }, { passive: true});
             removeButton.addEventListener('click', () =>{
                 removeMarker();
             }, { passive: true});
+            addButtonTooltip(removeButton);
             
             rightControls.appendChild(removeButton);
             //------------------------------------------------------------------------
@@ -734,8 +790,8 @@ function initControls(container) {
             const shotButton = document.createElement('button');
             shotButton.setAttribute("id", "shot-button");
             shotButton.setAttribute("class", "ytp-button custom-button");
-            shotButton.setAttribute("aria-label", "Shot");
-            shotButton.setAttribute("title", "Shot");
+            //shotButton.setAttribute("aria-label", "Shot");
+            shotButton.setAttribute("hint", "Скриншот");
 
             const icon = document.createElement('img');
             icon.setAttribute("height", "32px");
@@ -747,15 +803,16 @@ function initControls(container) {
             shotButton.appendChild(icon);
 
             shotButton.addEventListener("mouseover", ()=>{
-                shotButton.style.opacity = 0.8;
+                //shotButton.style.opacity = 0.8;
             }, { passive: true});
             shotButton.addEventListener("mouseout", ()=>{
-                shotButton.style.opacity = 1;
+                //shotButton.style.opacity = 1;
             }, { passive: true});
             shotButton.addEventListener('click', () =>{
                 saveScreenshot();
             }, { passive: true});
-            
+            addButtonTooltip(shotButton);
+
             rightControls.appendChild(shotButton);
             //------------------------------------------------------------------------
     }
@@ -792,6 +849,7 @@ function isAdShowing() {
     return (document.querySelector("div.ad-showing") != null);
 }
 //-------------------------------------------------------------------------------------------
+
 
 function init() {
     // Only attach while specific video view
