@@ -182,7 +182,7 @@ function getTimeString(time) {
     const hours = Math.floor(floor / 3600);
     const minutes = Math.floor((floor / 60) % 60);
     const seconds = Math.floor(floor % 60);
-    return `${pad(hours, 2)}:${pad(minutes, 2)}:${pad(seconds, 2)}`;
+    return hours ? `${pad(hours, 2)}:${pad(minutes, 2)}:${pad(seconds, 2)}` : `${pad(minutes, 2)}:${pad(seconds, 2)}`;
 }
 //-------------------------------------------------------------------------------------------
 
@@ -238,7 +238,6 @@ function addVisualMarker(time, duration) {
     marker.className = "marker";
 
     marker.setAttribute("time", time.toString());
-    marker.setAttribute("tmp_duration", duration);
 
     let percent = time * 100 / duration;
     marker.style.left = percent + "%";
@@ -256,16 +255,19 @@ function addVisualMarker(time, duration) {
     marker_tooltip.innerText = getTimeString(time);
     marker_tooltip.style.opacity = (mainSettings && mainSettings.show_labels) ? 1 : 0;
 
-    /*var marker_tooltip_input = document.createElement("input");
+    /*
+    var marker_tooltip_input = document.createElement("input");
     marker_tooltip_input.className = "marker-tooltip-input";
     marker_tooltip_input.type = "text";
+    marker_tooltip_input.style.display = "none";
     marker_tooltip.appendChild(marker_tooltip_input);
     */
-
     //marker_tooltip.style.opacity = 0;
     
     marker_tooltip.addEventListener('dblclick', function (e) {
-        card.classList.toggle('large');
+        //marker_tooltip_input.style.display = "block";
+        console.log('Double clicked');
+        //marker.style.opacity = 1;
     });
 
     marker.appendChild(marker_tooltip);

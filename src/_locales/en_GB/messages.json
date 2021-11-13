@@ -32,7 +32,7 @@
         "message": "History depth"
     },
     "show_labels": {
-        "message": "Show labels"
+        "message": "Show time labels"
     },
     "save_button": {
         "message": "Save"

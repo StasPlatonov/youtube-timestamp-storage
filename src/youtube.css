@@ -21,8 +21,7 @@
 }
 
 .marker:hover {
-    transform: scale(1.5);
-    opacity: 1;
+    transform: scale(1.1);
 }
 
 .marker-current {
@@ -37,7 +36,7 @@
     border-radius: 6px;
     padding: 1px 0;
     position: relative;
-    z-index: 1;
+    z-index: 1010;
     bottom: 100%;
     left: -25px;
     opacity: 1;
