@@ -4,10 +4,10 @@ const defaultSettings = {
     "marker-color": "#FFFFFF",
     "current-marker-color": "#00FF00",
     "marker-width": 4,
-    "marker-height": 20,
-    "marker-opacity": 0.4,
+    "marker-height": 15,
+    "marker-opacity": 0.2,
     "marker-offset": 0,
-    "history-depth": 100,
+    "history-depth": 200,
     "show_labels": true
 };
 
@@ -209,6 +209,15 @@ chrome.runtime.onMessage.addListener((req, info, callback) =>{
     if (req.action === 'get-data') {
         chrome.storage.local.get("videodata", function(data){
             callback(data);
+        });
+        return true;
+    }
+
+    if (req.action === 'import-data') {
+        //console.log(`Import data ${JSON.stringify(req.data)}`);
+        chrome.storage.local.set({"videodata": req.data}, function(){
+            console.log(`Data has been imported`);
+            callback();
         });
         return true;
     }

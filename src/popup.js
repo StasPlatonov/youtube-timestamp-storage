@@ -146,8 +146,49 @@ function removeSelected() {
 }
 //-------------------------------------------------------------------------------------------
 
+function download(content, fileName, contentType) {
+    var a = document.createElement("a");
+    var file = new Blob([content], {type: contentType});
+    a.href = URL.createObjectURL(file);
+    a.download = fileName;
+    a.click();
+    a.remove();
+}
+
 function init() {
     localize();
+
+    $('#exportBtn').on('click', function() {
+        chrome.storage.local.get("videodata", function(data){
+            if (!data || !data.videodata) {
+                return;
+            }
+            
+            download(JSON.stringify(data.videodata, null, 2), 'videodata.json', 'text/plain');
+        });
+    });
+
+    $('#importBtn').on('change', function() {
+        var fr = new FileReader();
+        fr.onload = function(){
+            //console.log(`Loaded file ${fr.result}`);
+            try {
+                videodata = JSON.parse(fr.result);
+                if (!videodata) {
+                    console.log('No data to import');
+                    return;
+                }
+
+                chrome.runtime.sendMessage({action: 'import-data', data: videodata}, function() {
+                    update();
+                });
+            } catch (error) {
+                console.error(`Failed to import data: ${error.message}`);
+            }
+        }
+              
+        fr.readAsText(this.files[0]);
+    });
 
     $('#removeBtn').on('click', function() {
         removeSelected();

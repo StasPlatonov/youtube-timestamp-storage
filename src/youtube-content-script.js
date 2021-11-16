@@ -225,7 +225,7 @@ function applyMarkerSettings(marker, settings) {
     marker.style.top = `${-(parseInt(settings["marker-height"]) - 5) - parseInt(settings["marker-offset"])}px`;
     marker.style.opacity = parseFloat(settings["marker-opacity"]);
 
-    tooltip = marker.querySelector(".marker-tooltip");
+    tooltip = marker.children[0];
     tooltip.style.opacity = settings.show_labels ? 1 : 0;
 }
 //-------------------------------------------------------------------------------------------
@@ -245,15 +245,18 @@ function addVisualMarker(time, duration) {
     //let pos = time * width / duration;
     //console.log(`Create visual marker ${time} at pos ${pos}`);
 
-    marker.addEventListener("click", ()=>{
-        jumpToMarker(time);
-    }, { passive: true});
-
     // Hint
     var marker_tooltip = document.createElement("div");
     marker_tooltip.className = "marker-tooltip";
-    marker_tooltip.innerText = getTimeString(time);
+    //marker_tooltip.className = "marker-tooltip-vertical";
     marker_tooltip.style.opacity = (mainSettings && mainSettings.show_labels) ? 1 : 0;
+
+    var marker_tooltip_text = document.createElement("div");
+    marker_tooltip_text.className = "marker-tooltip-text";
+    //marker_tooltip_text.className = "marker-tooltip-text-vertical";
+    marker_tooltip_text.innerText = getTimeString(time);
+    marker_tooltip.appendChild(marker_tooltip_text);
+    
 
     /*
     var marker_tooltip_input = document.createElement("input");
@@ -271,6 +274,17 @@ function addVisualMarker(time, duration) {
     });
 
     marker.appendChild(marker_tooltip);
+
+    marker.addEventListener("click", ()=>{
+        jumpToMarker(time);
+    }, { passive: true});
+    /*marker.addEventListener("mouseover", ()=>{
+        //marker_tooltip_text.style.opacity = 0;
+    }, { passive: true});
+    marker.addEventListener("mouseout", ()=>{
+        //marker_tooltip_text.style.opacity = 1;
+    }, { passive: true});*/
+
     
     markers_container.appendChild(marker);
 
@@ -660,7 +674,8 @@ function addButtonTooltip(button, text) {
 
         tooltip.style.lineHeight = `${isFullScreen() ? 22 : 15}px`; // Change tooltip line size in fullscreen mode
         
-        tooltip.style.left = `${br.left - (ttr.right - ttr.left) / 2}px`;
+        //@TODO: fix hardcoded offset. use label width
+        tooltip.style.left = `${br.left - (ttr.right - ttr.left) / 2 - 40}px`;
         tooltip.style.opacity = 1;
 
         // Change text size in fullscreen mode

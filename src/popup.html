@@ -27,8 +27,15 @@
                     </div>
                 </div>
                 <p class="header-text" data-locale="table_title"></p>
-                <button id="removeBtn" class="toolbar-button toolbar-options-button" title-locale="remove_tooltip"><i class="fa fa-trash"></i></button>
-                <button id="optionsBtn" class="toolbar-button toolbar-options-button" title-locale="settings_tooltip"><i class="fa fa-cog"></i></button>
+                
+                <button id="removeBtn" class="toolbar-button" title-locale="remove_tooltip"><i class="fa fa-trash"></i></button>
+                <button id="optionsBtn" class="toolbar-button" title-locale="settings_tooltip"><i class="fa fa-cog"></i></button>
+                <div class="toolbar-input-button">
+                    <label for="importBtn" class="fa fa-download" title-locale="import_tooltip">
+                    </label>
+                    <input id="importBtn" type="file" accept=".json"/>
+                </div>
+                <button id="exportBtn" class="toolbar-button" title-locale="export_tooltip"><i class="fa fa-upload"></i></button>
             </div>
             <table id="markers-table" class = "markers-table">
                 <thead>

@@ -97,6 +97,7 @@ body {
     width: 32px;
     height: 32px;
     margin: 2px;
+    float: right;
 }
   
 /* Darker background on mouse-over */
@@ -104,10 +105,34 @@ body {
     background-color: RoyalBlue;
 }
 
-.toolbar-options-button {
+.toolbar-input-button {
+    background-color: DodgerBlue;
+    border: none;
+    color: white; /* White text */
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px 4px 4px 4px;
+    width: 32px;
+    height: 32px;
+    margin: 2px;
     float: right;
 }
 
+/* Darker background on mouse-over */
+.toolbar-input-button:hover {
+    background-color: RoyalBlue;
+}
+
+.toolbar-input-button > label{
+    width: 100%;
+    height: 80%;
+    cursor: pointer;
+    padding-top: 8px;
+}
+
+.toolbar-input-button > input{
+    display: none;
+}
 
 .total-markers {
     display: flex;

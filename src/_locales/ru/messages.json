@@ -70,6 +70,12 @@
     "column_link": {
         "message": "Ссылка"
     },
+    "export_tooltip": {
+        "message": "Экспорт данных"
+    },
+    "import_tooltip": {
+        "message": "Импорт данных"
+    },
     "remove_tooltip": {
         "message": "Удалить выбранные видео из списка"
     },

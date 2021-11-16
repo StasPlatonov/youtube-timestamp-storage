@@ -70,6 +70,12 @@
     "column_link": {
         "message": "Referencia"
     },
+    "export_tooltip": {
+        "message": "Exportación de datos"
+    },
+    "import_tooltip": {
+        "message": "Importación de datos"
+    },
     "remove_tooltip": {
         "message": "Remove selected video from list"
     },

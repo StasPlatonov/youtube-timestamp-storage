@@ -2,10 +2,10 @@ const defaultSettings = {
     "marker-color": "#FFFFFF",
     "current-marker-color": "#00FF00",
     "marker-width": 4,
-    "marker-height": 20,
-    "marker-opacity": 0.4,
+    "marker-height": 15,
+    "marker-opacity": 0.2,
     "marker-offset": 0,
-    "history-depth": 100,
+    "history-depth": 200,
     "show_labels": true
 };
 //-------------------------------------------------------------------------------------------
