@@ -325,9 +325,15 @@ function createMarker()
     var duration = ytVideo.duration;
     var title = ytVideoPlayer.querySelector(".ytp-title").innerText;
 
-    const author = document.querySelector("span[itemprop='author']");
-    const authorName = author.querySelector("link[itemprop='name']").getAttribute("content");
-    const authorLink = author.querySelector("link[itemprop='url']").getAttribute("href");
+    const chName = document.querySelector("ytd-video-secondary-info-renderer").querySelector("ytd-channel-name");
+    const text = chName.querySelector("yt-formatted-string[id='text']");
+    const aItem = text.querySelector("a");
+    const authorName = aItem.innerText;
+    const authorLink = aItem.getAttribute("href");
+
+    //const author = document.querySelector("span[itemprop='author']");
+    //const authorName = author.querySelector("link[itemprop='name']").getAttribute("content");
+    //const authorLink = author.querySelector("link[itemprop='url']").getAttribute("href");
 
     //console.log(`Create marker at ${time} for ${video_id} with title ${title}`);
 
