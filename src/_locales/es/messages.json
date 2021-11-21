@@ -1,6 +1,6 @@
 {
     "name": {
-        "message": "Timeline Enhancer for Youtube",
+        "message": "Timestamp Storage for YouTube",
         "description": "Nombre de la extensión"
     },
     "description": {
@@ -84,6 +84,9 @@
     },
     "total_videos": {
         "message": "Videos totales:"
+    },
+    "storage_size": {
+        "message": "Tamaño de almacenamiento:"
     },
     "total_markers": {
         "message": "Marcadores totales:"

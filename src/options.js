@@ -5,7 +5,7 @@ const defaultSettings = {
     "marker-height": 15,
     "marker-opacity": 0.2,
     "marker-offset": 0,
-    "history-depth": 200,
+    "history-depth": 1000,
     "show_labels": true
 };
 //-------------------------------------------------------------------------------------------
@@ -55,8 +55,6 @@ function saveOptions() {
         "show_labels": document.getElementById('show-labels').checked
     };
 
-    console.log(JSON.stringify(settings));
-    
     chrome.storage.sync.set({ settings: settings }, function() {
         var status = document.getElementById('status');
         status.textContent = chrome.i18n.getMessage('saved_message');
@@ -69,11 +67,11 @@ function saveOptions() {
 
 function logStorage() {
     chrome.storage.sync.get(function(data){
-        console.log("chrome.storage.sync:");
+        //console.log("chrome.storage.sync:");
         if (chrome.runtime.lastError) {
             console.error(chrome.runtime.lastError);
         } else {
-            console.log(data);
+            //console.log(data);
         }
     });
 }

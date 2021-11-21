@@ -43,10 +43,19 @@
     transition: opacity 0.3s;
 }
 
+/*.marker-tooltip:hover {
+    background-color: rgba(28,28,28,0.9);
+}*/
+
 .marker-tooltip-text {
     text-align: center;
     display: inline-block;
 }
+
+/*
+.marker-tooltip-text:hover {
+    opacity: 0;
+}*/
 
 .marker-tooltip-vertical {
     width: fit-content;

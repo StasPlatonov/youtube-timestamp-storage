@@ -1,4 +1,4 @@
-console.log('Youtube extension attached');
+//console.log('Timestamps Storage for YouTube extension attached');
 
 var mainSettings = null;
 
@@ -34,7 +34,7 @@ var switchVideoDetector = setInterval(function() {
         var url = new URL(location);
         var video_id = url.searchParams.get("v");
         if (video_id !== videoId) {
-            console.log(`Detected switching video to ${video_id}`);
+            //console.log(`Detected switching video to ${video_id}`);
             init();
         }
     }
@@ -130,7 +130,7 @@ function initMarkers(video) {
     var timestamps = video.timestamps;
 
     if (timestamps.length == 0) {
-        console.log(`Markers are empty for video ${vId}`);
+        //console.log(`Markers are empty for video ${vId}`);
         return;
     }
 
@@ -151,7 +151,7 @@ function initMarkers(video) {
 
 
 function removeMarkers() {
-    console.log(`Remove markers`);
+    //console.log(`Remove markers`);
     markers.clear();
 
     // Remove visual markers
@@ -269,7 +269,7 @@ function addVisualMarker(time, duration) {
     
     marker_tooltip.addEventListener('dblclick', function (e) {
         //marker_tooltip_input.style.display = "block";
-        console.log('Double clicked');
+        //console.log('Double clicked');
         //marker.style.opacity = 1;
     });
 
@@ -278,12 +278,12 @@ function addVisualMarker(time, duration) {
     marker.addEventListener("click", ()=>{
         jumpToMarker(time);
     }, { passive: true});
-    /*marker.addEventListener("mouseover", ()=>{
-        //marker_tooltip_text.style.opacity = 0;
+    marker.addEventListener("mouseover", ()=>{
+        marker_tooltip.style.opacity = 0;
     }, { passive: true});
     marker.addEventListener("mouseout", ()=>{
-        //marker_tooltip_text.style.opacity = 1;
-    }, { passive: true});*/
+        marker_tooltip.style.opacity = 1;
+    }, { passive: true});
 
     
     markers_container.appendChild(marker);
@@ -314,7 +314,7 @@ function createMarker()
 {
     if (!markers_container)
     {
-        console.log('Failed to add marker. No markers container found');
+        console.error('Failed to add marker. No markers container found');
         return;
     }
 
@@ -382,7 +382,7 @@ function removeMarker()
 
     var title = ytVideoPlayer.querySelector(".ytp-title").innerText
 
-    console.log(`Remove marker ${markerTime} from ${video_id}`);
+    //console.log(`Remove marker ${markerTime} from ${video_id}`);
 
     // Remove from storage
     var marker = {
@@ -488,7 +488,8 @@ function checkAndRemoveStaticAD(container) {
         return;
     }
     
-    console.log(`Static Adv detected. Removing...`);
+    //console.log(`Static Adv detected. Removing...`);
+    
     //let timerId = setTimeout(function() {
         container.innerHTML = "";
     //}, 100);
@@ -507,7 +508,7 @@ function checkAndRemoveVideoAD(container) {
         return;
     }
      
-    console.log(`Video Adv detected. Removing...`);
+    //console.log(`Video Adv detected. Removing...`);
     let rewindTimer = setTimeout(function() {
         ytVideo.currentTime = ytVideo.duration;
             
@@ -518,7 +519,7 @@ function checkAndRemoveVideoAD(container) {
                 skipButton.click();
             }
             else{
-                console.log('Skip button not found!');
+                //console.log('Skip button not found!');
             }
         }, 1000);
     }, 100);
@@ -529,12 +530,12 @@ function checkAndRemoveVideoAD(container) {
 function onTargetVideoLoaded(video) {
     ytVideo = ytVideoPlayer.querySelector('video');
 
-    console.log(`Target video loaded. Duration: ${ytVideo.duration}`);
+    //console.log(`Target video loaded. Duration: ${ytVideo.duration}`);
 
     progressBar = document.querySelector(".ytp-chrome-bottom").querySelector('.ytp-progress-bar');
 
     if (!document.querySelector('.markers_container')) {
-        console.log('Create markers container');
+        //console.log('Create markers container');
         markers_container = document.createElement('div');
         markers_container.id = "markers_container";
         markers_container.className = "markers_container";
@@ -542,7 +543,7 @@ function onTargetVideoLoaded(video) {
         progressBar.appendChild(markers_container);
     }
     else {
-        console.log('Markers container already exists');
+        //console.log('Markers container already exists');
     }
 
     initMarkers(video);
@@ -579,7 +580,7 @@ function initADBlock(container) {
     }
     else
     {
-        console.log('No ADs container found');
+        //console.log('No ADs container found');
     }
 
     // ADs can be already loaded at the start
@@ -877,7 +878,7 @@ function loadSettings() {
     {
         return;
     }
-    console.log(`Loading settings...`);
+    //console.log(`Loading settings...`);
 
     chrome.runtime.sendMessage({action: 'get-settings'}, function(sett) {
         mainSettings = sett;
@@ -891,12 +892,11 @@ function isAdShowing() {
 }
 //-------------------------------------------------------------------------------------------
 
-
 function init() {
     // Only attach while specific video view
     if (!document.location.href.includes('youtube.com/watch?'))
     {
-        console.log(`Skip current location ('${document.location.href}') from init`);
+        //console.log(`Skip current location ('${document.location.href}') from init`);
         return;
     }
 
@@ -909,7 +909,7 @@ function init() {
     }
     videoId = video_id;
 
-    console.log("Init extension");
+    //console.log("Init extension");
     
     loadSettings();
 
@@ -945,7 +945,7 @@ function init() {
             // If we have video and duration in DB - check by it
             if (video && video.duration) {
                 if (ytVideo.duration != video.duration) {
-                    console.log('Video has different duration. Waiting more...');
+                    //console.log('Video has different duration. Waiting more...');
                     return;
                 }
             }
@@ -953,7 +953,7 @@ function init() {
                 //var videoAD = adContainer.querySelector('.ytp-ad-player-overlay');
                 //if (videoAD)
                 if (isAdShowing()) {
-                    console.log('AD still playing. Waiting more...');
+                    //console.log('AD still playing. Waiting more...');
                     return;
                 }
             }

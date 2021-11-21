@@ -1,6 +1,6 @@
 {
     "name": {
-        "message": "Timeline Enhancer for Youtube",
+        "message": "Timestamp Storage for YouTube",
         "description": "Extension name"
     },
     "description": {
@@ -87,6 +87,9 @@
     },
     "total_markers": {
         "message": "Total markers:"
+    },
+    "storage_size": {
+        "message": "Storage size:"
     },
     "tooltip_prev" : {
         "message": "Previous parker"

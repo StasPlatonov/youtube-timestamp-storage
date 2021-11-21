@@ -17,35 +17,6 @@ function hideError()
 }
 //-------------------------------------------------------------------------------------------
 
-/*
-function doRefresh()
-{
-    // Refresh statistics
-    $.ajax({
-            type : "GET",
-            url : "http://worldtimeapi.org/api/timezone/Europe/Moscow",
-            dataType : 'json',
-            contentType : 'application/json; charset=UTF-8',
-            success: function(result){
-                hideError();
-                $('#current-time').text(`Time: ${result["datetime"]}`);
-            },
-            error : function(xhr, status, error) {
-                console.log('Ошибка: ' + xhr.responseText + ' : ' + error);
-                showError("Ошибка получения времени");
-            }
-    });
-}
-
-doRefresh();
-*/
-//-------------------------------------------------------------------------------------------
-
-function clearView() {
-
-}
-//-------------------------------------------------------------------------------------------
-
 function formatDateTime(value) {
     var date = new Date(value);
     
@@ -90,8 +61,6 @@ function render(videodata) {
 //-------------------------------------------------------------------------------------------
 
 function update() {
-    clearView();
-
     chrome.storage.local.get("videodata", function(data){
         if (!data || !data.videodata) {
             return;
@@ -99,21 +68,12 @@ function update() {
 
         videos = data["videodata"]["videos"];
 
-        /*
-        var markersCount = 0;
-        videos.forEach(function(video, i) {
-            //const id = video["id"];
-            //const title = video["title"];
-            //const modified = video["modified"];
-            const timestamps = video["timestamps"];
-            markersCount += timestamps.length;
-            //console.log(`Video (id:${id} title:'${title}' modified:${modified} timestamps:${timestamps.length})`);
-        });
-
-        console.log(`Total ${videos.length} videos with ${markersCount} markers`);
-        */
-
         render(data["videodata"]);
+    });
+
+    chrome.storage.local.getBytesInUse(['videodata'], function(bytes){
+        const percent = 100.0 * bytes / chrome.storage.local.QUOTA_BYTES;
+        $("#storage-size-value").text(percent.toFixed(2) + "%"); 
     });
 }
 //-------------------------------------------------------------------------------------------
@@ -175,7 +135,7 @@ function init() {
             try {
                 videodata = JSON.parse(fr.result);
                 if (!videodata) {
-                    console.log('No data to import');
+                    console.error('No data to import');
                     return;
                 }
 

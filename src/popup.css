@@ -154,6 +154,16 @@ body {
     display: flex;
 }
 
+.storage-size {
+    display: flex;
+    float:left;
+}
+
+.storage-size-value {
+    padding-left: 4px;
+    display: flex;
+}
+
 /*
 .tooltip {
     position: relative;

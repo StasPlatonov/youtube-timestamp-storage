@@ -7,52 +7,13 @@ const defaultSettings = {
     "marker-height": 15,
     "marker-opacity": 0.2,
     "marker-offset": 0,
-    "history-depth": 200,
+    "history-depth": 1000,
     "show_labels": true
 };
 
 // Read settings
 chrome.storage.sync.get({ settings: defaultSettings }, function(data) {
     settings = data.settings;
-});
-
-//var lastLocation = null;
-//var lastVideoId = null;
-
-/*
-console.log('Set URL check timeout');
-var switchVideoDetector = setInterval(function() {
-    chrome.tabs.query({ active: true, currentWindow: true}, function(tabs) {
-        if (tabs.length == 0) {
-            return;
-        }
-        var tab = tabs[0];
-        if (!tab) {
-            return;
-        }
-        var location = tab.url;
-        console.log(`Current location: ${location}`);
-        if (location.includes('youtube.com/watch?'))
-        {
-            if (lastLocation != location) {
-                var url = new URL(location);
-                var video_id = url.searchParams.get("v");
-                if (video_id && (video_id !== lastVideoId)) {
-                    console.log(`Detected switching video to ${video_id}`);
-                    
-                    //getCurrentTabId().then((tabId)=>{
-                        chrome.tabs.sendMessage(tab.id, {action: "location-changed", location: location}, ()=>{
-                        });
-                    //});
-                }
-            }
-        }
-    });
-}, 5000);
-*/
-chrome.storage.local.getBytesInUse(['videodata'], function(bytes){
-    var percent = 100.0 * bytes / chrome.storage.local.QUOTA_BYTES;
-    console.log(`Storage size is ${bytes} bytes (${percent}%)`);
 });
 
 function getStoragePercent(callback) {
@@ -64,11 +25,11 @@ function getStoragePercent(callback) {
 
 function cleanMarkers(id) {
     if (!id) {
-        console.log('Clean all markers...');
+        //console.log('Clean all markers...');
         chrome.storage.local.clear();
     }
     else {
-        console.log(`Clean markers for id ${id}`);
+        //console.log(`Clean markers for id ${id}`);
     }
 }
 
@@ -117,10 +78,6 @@ chrome.commands.onCommand.addListener((command) => {
 //-------------------------------------------------------------------------------------------
 
 chrome.runtime.onMessage.addListener((req, info, callback) =>{
-    // This requires "activeTab" permission
-    //if (message == "runContentScript"){
-    //    chrome.tabs.executeScript({file: 'youtube-content-script.js'});
-    //}
     if (req.action === 'add-marker') {
         //console.log(`Add marker ${JSON.stringify(req.marker)} to storage`);
 
@@ -173,7 +130,7 @@ chrome.runtime.onMessage.addListener((req, info, callback) =>{
             video["modified"] = Date.now();
 
             setVideo(video, function() {
-                console.log(`Video ${JSON.stringify(video)} updated`);
+                //console.log(`Video ${JSON.stringify(video)} updated`);
                 callback();
             });
         })
@@ -216,7 +173,7 @@ chrome.runtime.onMessage.addListener((req, info, callback) =>{
     if (req.action === 'import-data') {
         //console.log(`Import data ${JSON.stringify(req.data)}`);
         chrome.storage.local.set({"videodata": req.data}, function(){
-            console.log(`Data has been imported`);
+            //console.log(`Data has been imported`);
             callback();
         });
         return true;
@@ -255,7 +212,6 @@ function logStorage() {
 
 function getVideo(params, callback)
 {
-    //console.log(`getVideo params: ${JSON.stringify(params)}`);
     chrome.storage.local.get("videodata", function(data){
         if (!data || !data.videodata)
         {
@@ -282,7 +238,7 @@ function setVideo(video, callback)
             new_data = {"videos": [video]};
 
             chrome.storage.local.set({"videodata": new_data}, function(){
-                console.log(`Video ${JSON.stringify(video)} has been saved to storage`);
+                //console.log(`Video ${JSON.stringify(video)} has been saved to storage`);
                 callback();
             });
             return;
@@ -299,7 +255,7 @@ function setVideo(video, callback)
             videos[index] = video;
 
             chrome.storage.local.set({"videodata": videodata}, function(){
-                console.log(`Video ${JSON.stringify(video)} has been saved to storage`);
+                //console.log(`Video ${JSON.stringify(video)} has been saved to storage`);
                 callback();
             });
             return;
@@ -317,7 +273,7 @@ function setVideo(video, callback)
                     return (left.modified - right.modified);
                 });
 
-                console.log(`History limit reached. Removing oldest video ${videos[0].id}`);
+                //console.log(`History limit reached. Removing oldest video ${videos[0].id}`);
                 videos.splice(0, 1);
             }
         }
@@ -327,9 +283,7 @@ function setVideo(video, callback)
         //videodata["videos"] = remainedVideos;
         
         chrome.storage.local.set({"videodata": videodata}, function(){
-            //console.log(`Videodata successfully saved`);
-            console.log(`Video ${JSON.stringify(video)} has been saved to storage`);
-            //logStorage();
+            //console.log(`Video ${JSON.stringify(video)} has been saved to storage`);
             callback();
         });
     });
@@ -357,7 +311,7 @@ function removeVideo(ids, callback) {
         videodata["videos"] = remainedVideos;
     
         chrome.storage.local.set({"videodata": videodata}, function(){
-            console.log(`Videos ${ids} has been removed from storage`);
+            //console.log(`Videos ${ids} has been removed from storage`);
             callback();
         });
     });
