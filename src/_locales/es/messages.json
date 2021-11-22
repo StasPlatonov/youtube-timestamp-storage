@@ -11,7 +11,7 @@
         "message": "Extensión ajustes"
     },
     "marker_color": {
-        "message": "Color de marcador?"
+        "message": "Color de marcador"
     },
     "current_marker_color": {
         "message": "Color de marcador activo"
@@ -35,19 +35,19 @@
         "message": "Mostrar etiquetas del tiempo"
     },
     "save_button": {
-        "message": "Guardar?"
+        "message": "Guardar"
     },
     "default_button": {
         "message": "Por defecto"
     },
     "saved_message": {
-        "message": "Guardado?"
+        "message": "Guardado"
     },
     "options_button": {
         "message": "Configuración"
     },
     "support_link": {
-        "message": "Apoyo?"
+        "message": "Apoyo"
     },
     "watch_link": {
         "message": "Mirar"
@@ -59,7 +59,7 @@
         "message": "Título"
     },
     "column_modified": {
-        "message": "Cambiado?"
+        "message": "Cambiado"
     },
     "column_markers": {
         "message": "Los marcadores"

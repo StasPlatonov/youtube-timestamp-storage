@@ -41,7 +41,10 @@ function render(videodata) {
             "title": video.title,
             "modified": formatDateTime(video.modified),
             "markers": timestamps.length.toString(),
-            "author": video.author ? {"name": video.author, "link": video.author_link} : null,
+            "author": video.author ? {
+                "name": video.author, 
+                "link": `https://youtube.com/${video.author_link}`
+            } : null,
             "link": `https://youtube.com/watch?v=${video.id}`
         };
 
