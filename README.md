@@ -1,14 +1,13 @@
 # yt-timeline
-Youtube timeline extension
+Timestamps Storage for Youtube
 
-Remember any moments of any video on YouTube and quickly navigate between them!
-Save screenshots from video with one click or key press!
+With this extension you can visually mark and remember your favorite tamistamps of any video on YouTube 
+and quickly navigate between them.  The extension adds customizable visual markers to the progress bar 
+of the video and allows you to quickly navigate between them. It has a viewable history of marked 
+videos. Additionally it allows you to create screenshots with one click on hotkey and removes some annoying popups.
 
-This extension allows you to add visual markers to progress bar and quickly navigate between them.
-It has a viewable history of marked videos and has visual settings for markers (including time labels). 
-Additionally, the extension removes some popup windows.
-
+You can find this extension on Chrome Web Store.
 
 Please, send any questions/suggestions to:
-platonovstas1982@gmail.com 
+platonovstas1982@gmail.com
 
