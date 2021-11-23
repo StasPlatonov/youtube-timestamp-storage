@@ -7,9 +7,9 @@ videos. Additionally it allows you to create screenshots with one click on hotke
 
 You can find this extension on Chrome Web Store.
 
-Some instructions with screenshots here:
+Some instructions with screenshots:
 https://docs.google.com/document/d/1OPPabFSwyA16WQEi0RTxP8-QiOBuncNkY7r8i7uTwyM/edit?usp=sharing
 
-Please, send any questions/suggestions to:
+Feel free to send any questions/suggestions/bugs to:
 platonovstas1982@gmail.com
 
