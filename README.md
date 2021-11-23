@@ -1,4 +1,4 @@
-# Timestamps Storage for Youtube
+# Timestamp Storage for Youtube
 
 With this extension you can visually mark and remember your favorite tamistamps of any video on YouTube 
 and quickly navigate between them.  The extension adds customizable visual markers to the progress bar 
