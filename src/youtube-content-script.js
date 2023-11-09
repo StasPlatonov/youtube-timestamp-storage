@@ -325,7 +325,8 @@ function createMarker()
     var duration = ytVideo.duration;
     var title = ytVideoPlayer.querySelector(".ytp-title").innerText;
 
-    const chName = document.querySelector("ytd-video-secondary-info-renderer").querySelector("ytd-channel-name");
+    const chName = document.querySelector("ytd-video-owner-renderer").querySelector("ytd-channel-name");
+
     const text = chName.querySelector("yt-formatted-string[id='text']");
     const aItem = text.querySelector("a");
     const authorName = aItem.innerText;
